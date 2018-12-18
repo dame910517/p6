@@ -1,13 +1,13 @@
 package p6;
 
-public class Array7 { //körde array.length-1 överallt pga värdet sätts t int[7]
+public class Array7 { //kÃ¶rde array.length-1 Ã¶verallt pga vÃ¤rdet sÃ¤tts t int[7]
 	private int[] array;
 
 	public Array7() { // default
 		array = new int[7];
 	}
 
-	public Array7(Array7 array7) {//obejt innehåller array med flera värden
+	public Array7(Array7 array7) {//obejt innehÃ¥ller array med flera vÃ¤rden
 
 		for (int i = 0; i < array.length-1; i++) {
 			int ny = array7.getElement(i);
@@ -16,9 +16,9 @@ public class Array7 { //körde array.length-1 överallt pga värdet sätts t int[7]
 	}
 	
 
-	public Array7(int[] array) { //  RÄTT?
+	public Array7(int[] array) { //  RÃ„TT?
 		for (int i = 0; i < array.length-1; i++) {
-			array[i]++; // lägge ri värden i array, RÄTT?
+			array[i]++; // lÃ¤gge ri vÃ¤rden i array, RÃ„TT?
 		}
 	}
 
@@ -28,13 +28,13 @@ public class Array7 { //körde array.length-1 överallt pga värdet sätts t int[7]
 		}
 	}
 
-	public int getElement(int pos) { // VARFÖR FEL? vill hitta positionen eller värdet?
+	public int getElement(int pos) { // VARFÃ–R FEL? vill hitta positionen eller vÃ¤rdet?
 		while (pos < array.length - 1 && pos >= 0) {
 			return array[pos];
 		}
 	}
 
-	public void setArray(Array7 array7) { //SKA VARA SAMMA SOM KONSTURKTORN? NÄ?
+	public void setArray(Array7 array7) { //SKA VARA SAMMA SOM KONSTURKTORN? N
 		for (int i = 0; i < array.length-1; i++) {
 			int ny = array7.getElement(i);
 			array[i] = ny;
