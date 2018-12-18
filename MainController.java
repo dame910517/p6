@@ -15,10 +15,10 @@ public class MainController {
 	private int dispWidth = 0;
 	private Random rand = new Random();
 	private Display display;
-
+	
 	public MainController() {
 
-		dispWidth = 8;
+		dispWidth = 16;
 		dispHeight = 8;
 		String input = "Test badabing";
 
