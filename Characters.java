@@ -1,5 +1,6 @@
-package p6; //comment
+package p6;
 
+import java.awt.Color;
 import java.util.Arrays;
 
 public class Characters {
@@ -27,14 +28,44 @@ public class Characters {
 		case ' ':
 			res = space(back, fore);
 			break;
+		case '0':
+			res = zero(back, fore);
+			break;
+		case '1':
+			res = one(back, fore);
+			break;
+		case '2':
+			res = two(back, fore);
+			break;
+		case '3':
+			res = three(back, fore);
+			break;
+		case '4':
+			res = four(back, fore);
+			break;
+		case '5':
+			res = five(back, fore);
+			break;
 		case '6':
 			res = six(back, fore);
+			break;
+		case '7':
+			res = seven(back, fore);
+			break;
+		case '8':
+			res = eight(back, fore);
+			break;
+		case '9':
+			res = nine(back, fore);
 			break;
 		case 'a':
 			res = a(back, fore);
 			break;
 		case 'b':
 			res = b(back, fore);
+			break;
+		case 'c':
+			res = c(back, fore);
 			break;
 		case 'd':
 			res = d(back, fore);
@@ -54,6 +85,15 @@ public class Characters {
 		case 'i':
 			res = i(back, fore);
 			break;
+		case 'j':
+			res = j(back, fore);
+			break;
+		case 'k':
+			res = k(back, fore);
+			break;
+		case 'l':
+			res = l(back, fore);
+			break;
 		case 'm':
 			res = m(back, fore);
 			break;
@@ -66,6 +106,9 @@ public class Characters {
 		case 'p':
 			res = p(back, fore);
 			break;
+		case 'q':
+			res = q(back, fore);
+			break;
 		case 'r':
 			res = r(back, fore);
 			break;
@@ -75,12 +118,58 @@ public class Characters {
 		case 't':
 			res = t(back, fore);
 			break;
+		case 'u':
+		    res = u(back, fore);
+		    break;
+		case 'v':
+		    res = v(back, fore);
+		    break;
 		case 'w':
 			res = w(back, fore);
 			break;
+		case 'x':
+		    res = x(back, fore);
+		    break;
+		case 'y':
+		    res = y(back, fore);
+		    break;
+		case 'z':
+		    res = z(back, fore);
+		    break;
+		case 'å':
+		    res = å(back, fore);
+		    break;
+		case 'ä':
+		    res = ä(back, fore);
+		    break;
+		case 'ö':
+		    res = ö(back, fore);
+		    break;
 		case '!':
 			res = exclamation(back, fore);
 			break;
+		case '?':
+			res = question(back, fore);
+			break;
+		case '.':
+			res = dot(back, fore);
+			break;
+		case ',':
+			res = comma(back, fore);
+			break;
+		case '#':
+			res = hashtag(back, fore);
+			break;
+		case '+':
+			res = plus(back, fore);
+			break;
+		case '-':
+			res = minus(back, fore);
+			break;
+		case '=':
+			res = equals(back, fore);
+			break;
+		
 		default:
 			res = notFound(back, fore);
 			break;
@@ -99,6 +188,102 @@ public class Characters {
 		return new Array7x7(res);
 	}
 
+	public static Array7x7 zero() {
+		return zero(Color.WHITE, Color.BLACK);
+	}
+	
+	public static Array7x7 zero(int O, int X) {
+		int[][] res = {
+				{O, O, X, X, X, O, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, X, X, O},
+				{O, X, O, X, O, X, O},
+				{O, X, X, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, O, X, X, X, O, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 one() {
+		return one(Color.WHITE, Color.BLACK);
+	}
+	
+	public static Array7x7 one(int O, int X) {
+		int[][] res = {
+				{O, O, O, X, O, O, O},
+				{O, O, X, X, O, O, O},
+				{O, X, O, X, O, O, O},
+				{O, O, O, X, O, O, O},
+				{O, O, O, X, O, O, O},
+				{O, O, O, X, O, O, O},
+				{O, O, O, X, O, O, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 two() {
+		return two(Color.WHITE, Color.BLACK);
+	}
+	
+	public static Array7x7 two(int O, int X) {
+		int[][] res = {
+				{O, O, X, X, O, O, O},
+				{O, X, O, O, X, O, O},
+				{O, O, O, O, X, O, O},
+				{O, O, O, O, X, O, O},
+				{O, O, O, X, O, O, O},
+				{O, O, X, O, O, O, O},
+				{O, X, X, X, X, X, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 three() {
+		return three(Color.WHITE, Color.BLACK);
+	}
+	
+	public static Array7x7 three(int O, int X) {
+		int[][] res = {
+				{O, O, X, X, X, O, O},
+				{O, X, O, O, O, X, O},
+				{O, O, O, O, O, X, O},
+				{O, O, X, X, X, X, O},
+				{O, O, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, O, X, X, X, O, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 four() {
+		return four(Color.WHITE, Color.BLACK);
+	}
+	
+	public static Array7x7 four(int O, int X) {
+		int[][] res = {
+				{O, O, O, O, X, O, O},
+				{O, O, O, X, X, O, O},
+				{O, O, X, O, X, O, O},
+				{O, X, X, X, X, X, O},
+				{O, O, O, O, X, O, O},
+				{O, O, O, O, X, O, O},
+				{O, O, O, O, X, O, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 five() {
+		return five(Color.WHITE, Color.BLACK);
+	}
+	
+	public static Array7x7 five(int O, int X) {
+		int[][] res = {
+				{O, X, X, X, X, X, O},
+				{O, X, O, O, O, O, O},
+				{O, X, X, X, X, O, O},
+				{O, O, O, O, O, X, O},
+				{O, O, O, O, O, X, O},
+				{O, X, O, O, X, O, O},
+				{O, O, X, X, O, O, O}};
+		return new Array7x7(res);
+	}
+	
 	public static Array7x7 six() {
 		return six(Color.WHITE, Color.BLACK);
 	}
@@ -106,11 +291,59 @@ public class Characters {
 	public static Array7x7 six(int O, int X) {
 		int[][] res = {
 				{O, O, X, X, X, O, O},
-				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, O, O},
 				{O, X, O, O, O, O, O},
 				{O, X, X, X, X, O, O},
 				{O, X, O, O, O, X, O},
 				{O, X, O, O, O, X, O},
+				{O, O, X, X, X, O, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 seven() {
+		return seven(Color.WHITE, Color.BLACK);
+	}
+	
+	public static Array7x7 seven(int O, int X) {
+		int[][] res = {
+				{O, X, X, X, X, X, O},
+				{O, O, O, O, O, X, O},
+				{O, O, O, O, X, O, O},
+				{O, O, O, X, X, O, O},
+				{O, O, O, X, O, O, O},
+				{O, O, X, O, O, O, O},
+				{O, O, X, O, O, O, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 eight() {
+		return eight(Color.WHITE, Color.BLACK);
+	}
+	
+	public static Array7x7 eight(int O, int X) {
+		int[][] res = {
+				{O, O, X, X, X, O, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, O, X, X, X, O, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, O, X, X, X, O, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 nine() {
+		return nine(Color.WHITE, Color.BLACK);
+	}
+	
+	public static Array7x7 nine(int O, int X) {
+		int[][] res = {
+				{O, O, X, X, X, O, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, O, X, X, X, X, O},
+				{O, O, O, O, O, X, O},
+				{O, O, O, O, O, X, O},
 				{O, O, X, X, X, O, O}};
 		return new Array7x7(res);
 	}
@@ -147,6 +380,22 @@ public class Characters {
 		return new Array7x7(res);
 	}
 
+	public static Array7x7 c() {
+		return c(Color.WHITE, Color.BLACK);
+	}
+	
+	public static Array7x7 c(int O, int X) {
+		int[][] res = {
+				{O, O, O, X, X, X, O},
+				{O, O, X, O, O, X, O},
+				{O, X, O, O, O, O, O},
+				{O, X, O, O, O, O, O},
+				{O, X, O, O, O, O, O},
+				{O, O, X, O, O, X, O},
+				{O, O, O, X, X, X, O}};
+		return new Array7x7(res);
+	}
+	
 	public static Array7x7 d() {
 		return d(Color.WHITE, Color.BLACK);
 	}
@@ -243,6 +492,54 @@ public class Characters {
 		return new Array7x7(res);
 	}
 
+	public static Array7x7 j() {
+		return j(Color.WHITE, Color.BLACK);
+	}
+	
+	public static Array7x7 j(int O, int X) {
+		int[][] res = {
+				{O, O, X, X, X, X, O},
+				{O, O, O, O, X, O, O},
+				{O, O, O, O, X, O, O},
+				{O, O, O, O, X, O, O},
+				{O, X, O, O, X, O, O},
+				{O, O, X, O, X, O, O},
+				{O, O, O, X, O, O, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 k() {
+		return k(Color.WHITE, Color.BLACK);
+	}
+	
+	public static Array7x7 k(int O, int X) {
+		int[][] res = {
+				{O, X, X, O, O, X, O},
+				{O, O, X, O, O, X, O},
+				{O, O, X, O, X, O, O},
+				{O, O, X, X, O, O, O},
+				{O, O, X, O, X, O, O},
+				{O, O, X, O, O, X, O},
+				{O, X, X, O, O, X, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 l() {
+		return l(Color.WHITE, Color.BLACK);
+	}
+	
+	public static Array7x7 l(int O, int X) {
+		int[][] res = {
+				{O, X, X, X, O, O, O},
+				{O, O, X, O, O, O, O},
+				{O, O, X, O, O, O, O},
+				{O, O, X, O, O, O, O},
+				{O, O, X, O, O, O, O},
+				{O, O, X, O, O, X, O},
+				{O, X, X, X, X, X, O}};
+		return new Array7x7(res);
+	}
+	
 	public static Array7x7 m() {
 		return g(Color.WHITE, Color.BLACK);
 	}
@@ -252,7 +549,7 @@ public class Characters {
 				{O, X, O, O, O, X, O},
 				{O, X, X, O, X, X, O},
 				{O, X, O, X, O, X, O},
-				{O, X, O, O, O, X, O},
+				{O, X, O, X, O, X, O},
 				{O, X, O, O, O, X, O},
 				{O, X, O, O, O, X, O},
 				{O, X, O, O, O, X, O}};
@@ -267,9 +564,9 @@ public class Characters {
 		int[][] res = {
 				{O, X, O, O, O, X, O},
 				{O, X, X, O, O, X, O},
+				{O, X, X, O, O, X, O},
 				{O, X, O, X, O, X, O},
-				{O, X, O, X, O, X, O},
-				{O, X, O, X, O, X, O},
+				{O, X, O, X, X, X, O},
 				{O, X, O, O, X, X, O},
 				{O, X, O, O, O, X, O}};
 		return new Array7x7(res);
@@ -306,6 +603,22 @@ public class Characters {
 				{O, X, X, X, O, O, O}};
 		return new Array7x7(res);
 	}
+	
+	public static Array7x7 q() {
+		return q(Color.WHITE, Color.BLACK);
+	}
+
+	public static Array7x7 q(int O, int X) {
+		int[][] res = {
+				{O, O, X, X, X, O, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, X, O, O},
+				{O, O, X, X, O, X, O}};
+		return new Array7x7(res);
+	}
 
 	public static Array7x7 r() {
 		return r(Color.WHITE, Color.BLACK);
@@ -317,9 +630,9 @@ public class Characters {
 				{O, O, X, O, O, X, O},
 				{O, O, X, O, O, X, O},
 				{O, O, X, X, X, O, O},
-				{O, O, X, O, O, X, O},
-				{O, O, X, O, O, X, O},
-				{O, X, X, X, O, X, O}};
+				{O, O, X, X, O, O, O},
+				{O, O, X, O, X, O, O},
+				{O, X, X, O, O, X, O}};
 		return new Array7x7(res);
 	}
 
@@ -354,9 +667,41 @@ public class Characters {
 				{O, O, X, X, X, O, O}};
 		return new Array7x7(res);
 	}
+	
+	public static Array7x7 u() {
+		return u(Color.WHITE, Color.BLACK);
+	}
+
+	public static Array7x7 u(int O, int X) {
+		int[][] res = {
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, O, X, X, X, O, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 v() {
+		return v(Color.WHITE, Color.BLACK);
+	}
+
+	public static Array7x7 v(int O, int X) {
+		int[][] res = {
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, O, X, O, X, O, O},
+				{O, O, O, X, O, O, O}};
+		return new Array7x7(res);
+	}
 
 	public static Array7x7 w() {
-		return t(Color.WHITE, Color.BLACK);
+		return w(Color.WHITE, Color.BLACK);
 	}
 
 	public static Array7x7 w(int O, int X) {
@@ -370,9 +715,105 @@ public class Characters {
 				{O, O, X, O, X, O, O}};
 		return new Array7x7(res);
 	}
+	
+	public static Array7x7 x() {
+		return x(Color.WHITE, Color.BLACK);
+	}
 
+	public static Array7x7 x(int O, int X) {
+		int[][] res = {
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, O, X, O, X, O, O},
+				{O, O, O, X, O, O, O},
+				{O, O, X, O, X, O, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O}};
+		return new Array7x7(res);
+	}
+
+	public static Array7x7 y() {
+		return y(Color.WHITE, Color.BLACK);
+	}
+
+	public static Array7x7 y(int O, int X) {
+		int[][] res = {
+				{O, X, O, O, O, X, O},
+				{O, O, X, O, X, O, O},
+				{O, O, O, X, O, O, O},
+				{O, O, O, X, O, O, O},
+				{O, O, O, X, O, O, O},
+				{O, O, O, X, O, O, O},
+				{O, O, O, X, O, O, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 z() {
+		return z(Color.WHITE, Color.BLACK);
+	}
+
+	public static Array7x7 z(int O, int X) {
+		int[][] res = {
+				{O, X, X, X, X, X, O},
+				{O, X, O, O, O, X, O},
+				{O, O, O, O, X, O, O},
+				{O, O, O, X, O, O, O},
+				{O, O, X, O, O, O, O},
+				{O, X, O, O, O, X, O},
+				{O, X, X, X, X, X, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 å() {
+		return å(Color.WHITE, Color.BLACK);
+	}
+
+	public static Array7x7 å(int O, int X) {
+		int[][] res = {
+				{O, O, O, X, O, O, O},
+				{O, O, O, O, O, O, O},
+				{O, O, X, X, X, O, O},
+				{O, X, O, O, O, X, O},
+				{O, X, X, X, X, X, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 ä() {
+		return ä(Color.WHITE, Color.BLACK);
+	}
+
+	public static Array7x7 ä(int O, int X) {
+		int[][] res = {
+				{O, X, O, O, O, X, O},
+				{O, O, O, O, O, O, O},
+				{O, O, X, X, X, O, O},
+				{O, X, O, O, O, X, O},
+				{O, X, X, X, X, X, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 ö() {
+		return ö(Color.WHITE, Color.BLACK);
+	}
+
+	public static Array7x7 ö(int O, int X) {
+		int[][] res = {
+				{O, X, O, O, O, X, O},
+				{O, O, O, O, O, O, O},
+				{O, O, X, X, X, O, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, O, X, X, X, O, O}};
+		return new Array7x7(res);
+	}
+	
 	public static Array7x7 exclamation() {
-		return t(Color.WHITE, Color.BLACK);
+		return exclamation(Color.WHITE, Color.BLACK);
 	}
 
 	public static Array7x7 exclamation(int O, int X) {
@@ -386,20 +827,128 @@ public class Characters {
 				{O, O, O, X, O, O, O}};
 		return new Array7x7(res);
 	}
+	
+	public static Array7x7 question() {
+		return question(Color.WHITE, Color.BLACK);
+	}
+
+	public static Array7x7 question(int O, int X) {
+		int[][] res = {
+				{O, O, X, X, X, O, O},
+				{O, X, O, O, O, X, O},
+				{O, X, O, O, O, X, O},
+				{O, O, O, X, X, O, O},
+				{O, O, O, X, O, O, O},
+				{O, O, O, O, O, O, O},
+				{O, O, O, X, O, O, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 dot() {
+		return dot(Color.WHITE, Color.BLACK);
+	}
+
+	public static Array7x7 dot(int O, int X) {
+		int[][] res = {
+				{O, O, O, O, O, O, O},
+				{O, O, O, O, O, O, O},
+				{O, O, O, O, O, O, O},
+				{O, O, O, O, O, O, O},
+				{O, O, O, O, O, O, O},
+				{O, X, X, O, O, O, O},
+				{O, X, X, O, O, O, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 comma() {
+		return comma(Color.WHITE, Color.BLACK);
+	}
+
+	public static Array7x7 comma(int O, int X) {
+		int[][] res = {
+				{O, O, O, O, O, O, O},
+				{O, O, O, O, O, O, O},
+				{O, O, O, O, O, O, O},
+				{O, O, O, O, O, O, O},
+				{O, X, X, O, O, O, O},
+				{O, X, X, O, O, O, O},
+				{O, O, X, O, O, O, O}};
+		return new Array7x7(res);
+	}
+
+	public static Array7x7 hastag() {
+		return hastag(Color.WHITE, Color.BLACK);
+	}
+
+	public static Array7x7 hastag(int O, int X) {
+		int[][] res = {
+				{O, O, O, O, O, O, O},
+				{O, O, X, O, X, O, O},
+				{O, X, X, X, X, X, O},
+				{O, O, X, O, X, O, O},
+				{O, X, X, X, X, X, O},
+				{O, O, X, O, X, O, O},
+				{O, O, O, O, O, O, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 plus() {
+		return plus(Color.WHITE, Color.BLACK);
+	}
+
+	public static Array7x7 plus(int O, int X) {
+		int[][] res = {
+				{O, O, O, O, O, O, O},
+				{O, O, O, X, O, O, O},
+				{O, O, O, X, O, O, O},
+				{O, X, X, X, X, X, O},
+				{O, O, O, X, O, O, O},
+				{O, O, O, X, O, O, O},
+				{O, O, O, O, O, O, O}};
+		return new Array7x7(res);
+	}
+	
+	public static Array7x7 minus() {
+		return minus(Color.WHITE, Color.BLACK);
+	}
+
+	public static Array7x7 minus(int O, int X) {
+		int[][] res = {
+				{O, O, O, O, O, O, O},
+				{O, O, O, O, O, O, O},
+				{O, O, O, O, O, O, O},
+				{O, X, X, X, X, X, O},
+				{O, O, O, O, O, O, O},
+				{O, O, O, O, O, O, O},
+				{O, O, O, O, O, O, O}};
+		return new Array7x7(res);
+	}	
+	
+	
+	public static Array7x7 equals() {
+		return equals(Color.WHITE, Color.BLACK);
+	}
+
+	public static Array7x7 equals(int O, int X) {
+		int[][] res = {
+				{O, O, O, O, O, O, O},
+				{O, O, O, O, O, O, O},
+				{O, X, X, X, X, X, O},
+				{O, O, O, O, O, O, O},
+				{O, X, X, X, X, X, O},
+				{O, O, O, O, O, O, O},
+				{O, O, O, O, O, O, O}};
+		return new Array7x7(res);
+	}
 
 	public static Array7x7 notFound() {
 		return t(Color.WHITE, Color.BLACK);
 	}
 
 	public static Array7x7 notFound(int O, int X) {
-		int[][] res = {
-				{X, O, O, O, O, O, X},
-				{O, X, O, O, O, X, O},
-				{O, O, X, O, X, O, O},
-				{O, O, O, X, O, O, O},
-				{O, O, X, O, X, O, O},
-				{O, X, O, O, O, X, O},
-				{X, O, O, O, O, O, X}};
+		int[][] res = new int[7][7];
+		for (int[] row : res) 
+			Arrays.fill(row, X);
 		return new Array7x7(res);
-	}
+}
 }
