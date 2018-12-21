@@ -9,18 +9,14 @@ public class Array7x7 {
 	}
 
 	public Array7x7(Array7x7 array7x7) {
-		for (int i = 0; i < array2.length; i++) {
-			for (int j = 0; j < array2[0].length; j++) {
-				int ny = array7x7.getElement(i, j);
-				array2[i][j] = ny;
-			}
-		}
+		this();
+		setArray(array2);
 	}
 
 	public Array7x7(int[][] array) { 
 		for (int i = 0; i < array2.length; i++) {
 			for (int j = 0; j < array2[0].length; j++) {
-				array2[i][j]++;
+				this.array2[i][j] = array2[i][j]++;
 			}
 		}
 	}
