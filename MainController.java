@@ -12,8 +12,9 @@ public class MainController {
 	private Array7x7[][] arrFore;
 	private Array7x7[][] arrDisp;
 	private Array7x7[][] arrText;
-	private int colIndex = 0;
-	private int rowIndex = 0;
+	private LoopingCounter nextColRight;
+	private LoopingCounter nextColLeft;
+	private LoopingCounter rowIndex;
 	private int dispHeight;
 	private int dispWidth;
 	private Random rand = new Random();
@@ -24,9 +25,9 @@ public class MainController {
 	 */
 	public MainController() {
 
-		dispWidth = 16;
+		dispWidth = 8;
 		dispHeight = 8;
-		String input = "Test badabing";
+		String input = "Test badabing ";
 
 		arrDisp = new Array7x7[dispHeight][dispWidth];
 		arrBack = new Array7x7[dispHeight][dispWidth];
@@ -35,11 +36,12 @@ public class MainController {
 		initiateArray(arrBack);
 		initiateArray(arrFore);
 
-		fillArrayRandom(arrBack);
+		fillArray(arrBack, Color.BLACK);
 		fillArray(arrFore, Color.TRANSPARENT);
 
 		// Get text
-		arrText = Characters.translate(input, Color.TRANSPARENT, Color.RED);
+		//arrText = Characters.translate(input, Color.TRANSPARENT, Color.RED);
+		setText(input, Color.TRANSPARENT, Color.RED);
 
 		// Apply the text on the foreground
 		transferArray(arrFore, arrText);
@@ -92,7 +94,7 @@ public class MainController {
 	}
 
 	/**
-	 * Fyller bakgrundsarrayen med en färg, och apllicerar sedan en bild på den
+	 * Fyller bakgrundsarrayen med en färg, och applicerar sedan en bild på den
 	 * @param pic Bilden som ska användas, i formatet Picture som beskrivs i Picture-klassen i samma paket
 	 * @param backgroundColor Färgen som ska användas, i formatet som beskrivs i Color-klassen i samma paket
 	 */
@@ -161,29 +163,29 @@ public class MainController {
 	 * @throws WrongArrayLengthException
 	 */
 	public void shiftLeft() throws WrongArrayLengthException {
-		// Håll reda på vid vilket kolumn-index texten är för närvarande
-		colIndex--;
-		if (colIndex < 7 * (dispWidth-arrText[0].length))
-			colIndex = (dispWidth * 7)-1;
+
+		nextColRight.increase();
+		nextColLeft.increase();
 
 		for (int row = 0; row < arrFore.length; row++) {
 			Array7 finalCol = new Array7();
 			// Om texten är bredare än vad ColorDisplay är,
 			if (arrText[0].length > arrFore[0].length) {
-				// Plocka fram vilken array-kolumn texten är på
-				int textColA7x7Index = dispWidth - (colIndex < 0 ? (colIndex+1)/7 : colIndex/7+1);
-				// Och vilken element-kolumn texten är på
-				int textColElemIndex = (dispWidth * 7 - (colIndex+1))%7;
+
+				//test
+				int textColA7x7Index = nextColRight.getCounter()/7;
+				int textColElemIndex = nextColRight.getCounter()%7;
+				
 				// Om iteratorn är på samma Array7x7-rad som texten är på
-				if (rowIndex/7 == row) {
+				if (rowIndex.getCounter()/7 == row) {
 					// Skapa ett Array7-objekt med den övre delen av texten
-					for (int i = rowIndex%7; i < 7; i++)
-						finalCol.setElement(i, arrText[0][textColA7x7Index].getCol(textColElemIndex).getElement(i-rowIndex%7));
+					for (int i = rowIndex.getCounter()%7; i < 7; i++)
+						finalCol.setElement(i, arrText[0][textColA7x7Index].getCol(textColElemIndex).getElement(i-rowIndex.getCounter()%7));
 					// Annars (om vi är på raden under text-index, eller om vi är på översta raden medan text-raden är på den understa)
-				} else  if ((row == rowIndex/7+1 || (row == 0 && rowIndex/7 == dispHeight-1)) && rowIndex%7 != 0) {
+				} else  if ((row == rowIndex.getCounter()/7+1 || (row == 0 && rowIndex.getCounter()/7 == dispHeight-1)) && rowIndex.getCounter()%7 != 0) {
 					// Skapa ett Array7-objekt med den undre delen av texten
-					for (int i = 0; i < rowIndex%7; i++)
-						finalCol.setElement(i, arrText[0][textColA7x7Index].getCol(textColElemIndex).getElement(7-rowIndex%7+i));
+					for (int i = 0; i < rowIndex.getCounter()%7; i++)
+						finalCol.setElement(i, arrText[0][textColA7x7Index].getCol(textColElemIndex).getElement(7-rowIndex.getCounter()%7+i));
 				}
 				// Annars (om texten inte är bredare än ColorDisplay), plocka den första kolumnen
 			} else {
@@ -202,28 +204,29 @@ public class MainController {
 	 * @throws WrongArrayLengthException
 	 */
 	public void shiftRight() throws WrongArrayLengthException {
-		// Håll reda på vid vilket kolumn-index texten är för närvarande
-		colIndex++;
-		if (colIndex > (dispWidth * 7) -1)
-			colIndex = (dispWidth-arrText[0].length) * 7;
+
+		nextColRight.decrease();
+		nextColLeft.decrease();
+
 		for (int row = 0; row < arrFore.length; row++) {
 			Array7 firstCol = new Array7();
 			// Om texten är bredare än vad ColorDisplay är,
 			if (arrText[0].length > arrFore[0].length) {
-				// Plocka fram vilken array-kolumn texten är på
-				int textColA7x7Index = (colIndex <= 0 ? (Math.abs(colIndex)/7) : ((arrText[0].length * 7)-colIndex)/7);
-				//Och vilken element-kolumn texten är på
-				int textColElemIndex = (dispWidth * 7 - (colIndex+1))%7;
+
+				int textColA7x7Index = nextColLeft.getCounter()/7,
+						textColElemIndex = nextColLeft.getCounter()%7,
+						textRowA7x7Index = rowIndex.getCounter()/7,
+						textRowElemIndex = rowIndex.getCounter()%7;
 				// Om iteratorn är på samma Array7x7-rad som texten är på
-				if (rowIndex/7 == row) {
+				if (textRowA7x7Index == row) {
 					// Skapa ett Array7-objekt med den övre delen av texten
-					for (int i = rowIndex%7; i < 7; i++)
-						firstCol.setElement(i, arrText[0][textColA7x7Index].getCol(textColElemIndex).getElement(i-rowIndex%7));
+					for (int i = rowIndex.getCounter()%7; i < 7; i++)
+						firstCol.setElement(i, arrText[0][textColA7x7Index].getCol(textColElemIndex).getElement(i-rowIndex.getCounter()%7));
 					// Annars (om vi är på raden under text-index, eller om vi är på översta raden medan text-raden är på den understa)
-				} else  if ((row == rowIndex/7+1 || (row == 0 && rowIndex/7 == dispHeight-1)) && rowIndex%7 != 0) {
+				} else  if ((row == textRowA7x7Index+1 || (row == 0 && textRowA7x7Index == dispHeight-1)) && rowIndex.getCounter()%7 != 0) {
 					// Skapa ett Array7-objekt med den undre delen av texten
-					for (int i = 0; i < rowIndex%7; i++)
-						firstCol.setElement(i, arrText[0][textColA7x7Index].getCol(textColElemIndex).getElement(7-rowIndex%7+i));
+					for (int i = 0; i < rowIndex.getCounter()%7; i++)
+						firstCol.setElement(i, arrText[0][textColA7x7Index].getCol(textColElemIndex).getElement(7-rowIndex.getCounter()%7+i));
 				}
 				// Annars (om texten inte är bredare än ColorDisplay), plocka den första kolumnen
 			} else {
@@ -242,9 +245,7 @@ public class MainController {
 	 */
 	public void shiftUp() throws WrongArrayLengthException {
 		// Håll reda på vid vilket rad-index texten är för närvarande
-		rowIndex--;
-		if (rowIndex < 0)
-			rowIndex = 7 * dispHeight - 1;
+		rowIndex.decrease();
 		
 		// Flytta alla element ett steg uppåt
 		for (int col = 0; col < arrFore[0].length; col++) {
@@ -259,9 +260,7 @@ public class MainController {
 	 */
 	public void shiftDown() throws WrongArrayLengthException {
 		// Håll reda på vid vilket rad-index texten är för närvarande
-		rowIndex++;
-		if (rowIndex >= 7 * dispHeight)
-			rowIndex = 0;
+		rowIndex.increase();
 
 		// Flytta alla element ett steg nedåt
 		for (int col = 0; col < arrFore[0].length; col++) {
@@ -330,12 +329,16 @@ public class MainController {
 	 * Sätter texten som ska rullar över skärmen med valfria färger
 	 * @param input Texten som sätts
 	 * @param background Bakgrundsfärgen
-	 * @param foreground Textfärgen
+	 * @param foreground Textfärgen 
 	 */
 	public void setText(String input, int background, int foreground) {
 		arrText = Characters.translate(input, background, foreground);
 		fillArray(arrFore, Color.TRANSPARENT);
 		transferArray(arrFore, arrText);
+		//nextColRight = (dispWidth * 7) - 1;
+		nextColRight = new LoopingCounter(0, (arrText[0].length*7) - 1, dispWidth*7-1);
+		nextColLeft = new LoopingCounter(arrText[0].length*7-1);
+		rowIndex = new LoopingCounter(dispHeight*7-1);
 
 	}
 
