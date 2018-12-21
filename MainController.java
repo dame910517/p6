@@ -163,7 +163,7 @@ public class MainController {
 	 * @throws WrongArrayLengthException
 	 */
 	public void shiftLeft() throws WrongArrayLengthException {
-
+		// Håll reda på vilken rad som är nästa att ritas
 		nextColRight.increase();
 		nextColLeft.increase();
 
@@ -172,20 +172,21 @@ public class MainController {
 			// Om texten är bredare än vad ColorDisplay är,
 			if (arrText[0].length > arrFore[0].length) {
 
-				//test
-				int textColA7x7Index = nextColRight.getCounter()/7;
-				int textColElemIndex = nextColRight.getCounter()%7;
-				
+				int textColA7x7Index = nextColRight.getCounter()/7,
+						textColElemIndex = nextColRight.getCounter()%7,
+						textRowA7x7Index = rowIndex.getCounter()/7,
+						textRowElemIndex = rowIndex.getCounter()%7;
+
 				// Om iteratorn är på samma Array7x7-rad som texten är på
-				if (rowIndex.getCounter()/7 == row) {
+				if (textRowA7x7Index == row) {
 					// Skapa ett Array7-objekt med den övre delen av texten
-					for (int i = rowIndex.getCounter()%7; i < 7; i++)
-						finalCol.setElement(i, arrText[0][textColA7x7Index].getCol(textColElemIndex).getElement(i-rowIndex.getCounter()%7));
+					for (int i = textRowElemIndex; i < 7; i++)
+						finalCol.setElement(i, arrText[0][textColA7x7Index].getCol(textColElemIndex).getElement(i-textRowElemIndex));
 					// Annars (om vi är på raden under text-index, eller om vi är på översta raden medan text-raden är på den understa)
-				} else  if ((row == rowIndex.getCounter()/7+1 || (row == 0 && rowIndex.getCounter()/7 == dispHeight-1)) && rowIndex.getCounter()%7 != 0) {
+				} else  if ((row == textRowA7x7Index+1 || (row == 0 && textRowA7x7Index == dispHeight-1)) && textRowElemIndex != 0) {
 					// Skapa ett Array7-objekt med den undre delen av texten
-					for (int i = 0; i < rowIndex.getCounter()%7; i++)
-						finalCol.setElement(i, arrText[0][textColA7x7Index].getCol(textColElemIndex).getElement(7-rowIndex.getCounter()%7+i));
+					for (int i = 0; i < textRowElemIndex; i++)
+						finalCol.setElement(i, arrText[0][textColA7x7Index].getCol(textColElemIndex).getElement(7-textRowElemIndex+i));
 				}
 				// Annars (om texten inte är bredare än ColorDisplay), plocka den första kolumnen
 			} else {
@@ -204,7 +205,7 @@ public class MainController {
 	 * @throws WrongArrayLengthException
 	 */
 	public void shiftRight() throws WrongArrayLengthException {
-
+		// Håll reda på vilken rad som är nästa att ritas
 		nextColRight.decrease();
 		nextColLeft.decrease();
 
@@ -220,13 +221,13 @@ public class MainController {
 				// Om iteratorn är på samma Array7x7-rad som texten är på
 				if (textRowA7x7Index == row) {
 					// Skapa ett Array7-objekt med den övre delen av texten
-					for (int i = rowIndex.getCounter()%7; i < 7; i++)
-						firstCol.setElement(i, arrText[0][textColA7x7Index].getCol(textColElemIndex).getElement(i-rowIndex.getCounter()%7));
+					for (int i = textRowElemIndex; i < 7; i++)
+						firstCol.setElement(i, arrText[0][textColA7x7Index].getCol(textColElemIndex).getElement(i-textRowElemIndex));
 					// Annars (om vi är på raden under text-index, eller om vi är på översta raden medan text-raden är på den understa)
-				} else  if ((row == textRowA7x7Index+1 || (row == 0 && textRowA7x7Index == dispHeight-1)) && rowIndex.getCounter()%7 != 0) {
+				} else  if ((row == textRowA7x7Index+1 || (row == 0 && textRowA7x7Index == dispHeight-1)) && textRowElemIndex != 0) {
 					// Skapa ett Array7-objekt med den undre delen av texten
-					for (int i = 0; i < rowIndex.getCounter()%7; i++)
-						firstCol.setElement(i, arrText[0][textColA7x7Index].getCol(textColElemIndex).getElement(7-rowIndex.getCounter()%7+i));
+					for (int i = 0; i < textRowElemIndex; i++)
+						firstCol.setElement(i, arrText[0][textColA7x7Index].getCol(textColElemIndex).getElement(7-textRowElemIndex+i));
 				}
 				// Annars (om texten inte är bredare än ColorDisplay), plocka den första kolumnen
 			} else {
@@ -246,7 +247,7 @@ public class MainController {
 	public void shiftUp() throws WrongArrayLengthException {
 		// Håll reda på vid vilket rad-index texten är för närvarande
 		rowIndex.decrease();
-		
+
 		// Flytta alla element ett steg uppåt
 		for (int col = 0; col < arrFore[0].length; col++) {
 			Array7 finalRow = arrFore[0][col].getRow(0);
