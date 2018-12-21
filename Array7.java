@@ -8,17 +8,15 @@ public class Array7 {
 	}
 
 	public Array7(Array7 array7) {
+		this(); 
+		setArray(array7);
 
-		for (int i = 0; i < array.length; i++) {
-			int ny = array7.getElement(i);
-			array[i] = ny;
-		}
 	}
 	
 
 	public Array7(int[] array) {
 		for (int i = 0; i < array.length; i++) {
-			array[i]++; 
+			this.array[i] = array[i]++;
 		}
 	}
 
