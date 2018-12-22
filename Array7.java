@@ -36,7 +36,7 @@ public class Array7 {
 	}
 
 
-	public void setArray(Array7 array7) { //SKA VARA SAMMA SOM KONSTURKTORN? N
+	public void setArray(Array7 array7) { //måste skriva begränsnig
 		for (int i = 0; i < array.length; i++) {
 			int ny = array7.getElement(i);
 			array[i] = ny;
