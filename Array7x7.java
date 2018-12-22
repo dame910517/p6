@@ -28,8 +28,11 @@ public class Array7x7 {
 	}
 
 	public int getElement(int row, int col) { 
-		if (row >= 0 && row < array2.length && col >= 0 && col < array2.length) {
-			return array2[row][col];
+		try {
+			return array[pos][col];
+
+		} catch (NullPointerException e) {
+			return 0;
 		}
 	}
 
