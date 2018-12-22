@@ -26,11 +26,15 @@ public class Array7 {
 		}
 	}
 
-	public int getElement(int pos) { // VARFÖR FEL? vill hitta positionen eller värdet?
-		while (pos < array.length && pos >= 0) {
+	public int getElement(int pos) {
+		try {
 			return array[pos];
+
+		} catch (NullPointerException e) {
+			return 0;
 		}
 	}
+
 
 	public void setArray(Array7 array7) { //SKA VARA SAMMA SOM KONSTURKTORN? N
 		for (int i = 0; i < array.length; i++) {
