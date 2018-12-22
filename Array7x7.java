@@ -68,7 +68,7 @@ public class Array7x7 {
 
 //	Skapa metoder som kan skriva och läsa samliga element:
 
-	public void setArray(Array7x7 array7x7) { 
+	public void setArray(Array7x7 array7x7) { //måste skriva begränsnig
 		for (int i = 0; i < array2.length ; i++) {
 			for (int j = 0; j < array2[0].length ; j++) {
 				int ny = array7x7.getElement(i, j);
@@ -77,7 +77,7 @@ public class Array7x7 {
 		}
 	}
 
-	public void setArray(int[][] array) {
+	public void setArray(int[][] array) {//måste skriva begränsnig
 		this.array2 = array;
 	}
 
