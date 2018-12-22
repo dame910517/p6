@@ -24,7 +24,9 @@ public class Viewer extends JPanel {
 	private JPanel mainPanel = new JPanel();
 	private JPanel leftPanel = new JPanel();
 	private JPanel rightPanel = new JPanel();
-	private JPanel southPanel = new JPanel();
+	private JPanel southPanel = new JPanel(); //själva shitet 
+	private JPanel sydPanel = new JPanel();
+	private JPanel southRowPanel = new JPanel();
 	private JPanel centerPanel = new JPanel();
 	
 	
@@ -95,12 +97,12 @@ public class Viewer extends JPanel {
 		array7x7.setPreferredSize(new Dimension(550,30));
 		
 		row.setFont(font);
-		row.setPreferredSize(new Dimension(50,30));
 
 		
 		leftPanel.setPreferredSize(new Dimension(50,370));
 		rightPanel.setPreferredSize(new Dimension(50,370));
-		southPanel.setPreferredSize(new Dimension(550,50));
+		sydPanel.setPreferredSize(new Dimension(600,50));
+		southPanel.setPreferredSize(new Dimension(545,50));
 		centerPanel.setPreferredSize(new Dimension(300,370));
 		
 		add(array7x7, BorderLayout.NORTH);
@@ -109,12 +111,17 @@ public class Viewer extends JPanel {
 		
 		add(rightPanel, BorderLayout.EAST);
 		
-		add(southPanel, BorderLayout.SOUTH);
+		add(sydPanel, BorderLayout.SOUTH);
+		
+//		add(southPanel, BorderLayout.SOUTH);
 		
 		add(centerPanel, BorderLayout.CENTER);
 			
 		leftPanel.add(leftColumn, BorderLayout.WEST);
-		southPanel.add(southRow, BorderLayout.CENTER);
+		sydPanel.add(southRowPanel, BorderLayout.WEST);
+		southRowPanel.add(row, BorderLayout.WEST);
+		sydPanel.add(southPanel, BorderLayout.WEST);
+//		southPanel.add(southRow, BorderLayout.WEST);
 		centerPanel.add(panel, BorderLayout.CENTER);
 	}
 
