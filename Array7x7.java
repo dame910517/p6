@@ -29,7 +29,7 @@ public class Array7x7 {
 
 	public int getElement(int row, int col) { 
 		try {
-			return array[pos][col];
+			return array2[pos][col];
 
 		} catch (NullPointerException e) {
 			return 0;
