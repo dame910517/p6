@@ -51,8 +51,29 @@ public class Viewer extends JPanel {
 	private JLabel bottomRow5 = new JLabel();
 	private JLabel bottomRow6 = new JLabel();
 	private JLabel bottomRow7 = new JLabel();
+	
+	private Array7x7 array;
 
 	//Array7x7
+	
+	public void setArray7x7() {
+		JLabel[][] centerArray = new JLabel[7][7];
+		int[][] array2 = array.toIntArray();
+		int temp = 0;
+		for(int row = 0; row < centerArray.length; row++) {
+			for(int col = 0; col < centerArray[row].length; col ++) {
+				centerArray[row][col] = new JLabel();
+				centerArray[row][col].setBorder(BorderFactory.createMatteBorder(7, 10, 7, 10, java.awt.Color.WHITE));
+				centerArray[row][col].setFont(font);
+	}
+	}
+		for(int row = 0; row < centerArray.length; row++) {
+			for(int col = 0; col < centerArray[row].length; col ++) {
+				array2[row][col] = temp;
+				centerArray[row][col].setText(String.valueOf(temp));
+				panel.add(centerArray[row][col]);
+	}
+		}}
 
 	public void getArrayLeftColumn() {
 		JLabel[][] leftArray = new JLabel[7][1];
@@ -66,17 +87,17 @@ public class Viewer extends JPanel {
 		}
 	}
 
-	public void getArray7x7() {
-		JLabel[][] centerArray = new JLabel[7][7];
-		for(int row = 0; row < centerArray.length; row++) {
-			for(int col = 0; col < centerArray[row].length; col ++) {
-				centerArray[row][col] = new JLabel("A");
-				centerArray[row][col].setBorder(BorderFactory.createMatteBorder(7, 10, 7, 10, java.awt.Color.WHITE));
-				centerArray[row][col].setFont(font);
-				panel.add(centerArray[row][col]);
-			}
-		}
-	}
+//	public void getArray7x7() {
+//		JLabel[][] centerArray = new JLabel[7][7];
+//		for(int row = 0; row < centerArray.length; row++) {
+//			for(int col = 0; col < centerArray[row].length; col ++) {
+//				centerArray[row][col] = new JLabel("A");
+//				centerArray[row][col].setBorder(BorderFactory.createMatteBorder(7, 10, 7, 10, java.awt.Color.WHITE));
+//				centerArray[row][col].setFont(font);
+//				panel.add(centerArray[row][col]);
+//			}
+//		}
+//	}
 
 	public void getArraySouthRow() {
 		JLabel[][] southRow = new JLabel[1][7];
@@ -129,7 +150,7 @@ public class Viewer extends JPanel {
 		Viewer viewer = new Viewer();
 		JFrame frame = new JFrame("Array7x7 viewer");
 		viewer.getArrayLeftColumn();
-		viewer.getArray7x7();
+		viewer.setArray7x7();
 		viewer.getArraySouthRow();
 		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		frame.add( viewer );
