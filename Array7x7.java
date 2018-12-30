@@ -95,7 +95,7 @@ public class Array7x7 {
 		Array7x7 ny = new Array7x7();
 		for (int i = 0; i < array2.length ; i++) {
 			for (int j = 0; j < array2[0].length ; j++) {
-				array2[i][j] = ny.getElement(i, j);
+				ny.getElement(i, j) = array2[i][j];
 			}
 		}
 		return ny;
