@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import java.util.Random;
 
 /**
- * En klass för att skapa en array som kan appliceras på en ColorDisplay med olika effekter
+ * En klass för att skapa en array som kan appliceras på en ColorDisplay, med olika effekter
  * @author Filip Spånberg
  */
 public class MainController {
@@ -27,7 +27,7 @@ public class MainController {
 
 		dispWidth = 8;
 		dispHeight = 8;
-		String input = "Test badabing ";
+		String input = "Test";
 
 		arrDisp = new Array7x7[dispHeight][dispWidth];
 		arrBack = new Array7x7[dispHeight][dispWidth];
@@ -103,24 +103,22 @@ public class MainController {
 		fillArray(arrBack, backgroundColor); // Fyll bakgrunden med färgen backgroundColor
 
 		// Skapa de variabler som kommer behövas
-		double dDispHeight = dispHeight * 7, dDispWidth = dispWidth * 7,
-				picHeight = pic.getHeight(), picWidth = pic.getWidth(),
-				firstRenderRow = 0, lastRenderRow = dDispHeight - 1,
-				firstRenderCol = 0, lastRenderCol = dDispWidth - 1,
-				picHeightInElems, picWidthInElems, pixelsPerElem, x, y;
+		double  firstRenderRow = 0, lastRenderRow = (dispHeight * 7) - 1,
+				firstRenderCol = 0, lastRenderCol = (dispWidth * 7) - 1,
+				pixelsPerElem, x, y;
 
-		/* Ta reda på om displayens bredd/höjd ratio är större eller mindre än bildens
+		/* Ta reda på om displayens höjd/bredd-förhållande är större eller mindre än bildens
 		 * och initiera variablerna därefter.
 		 */
-		if (dDispHeight/dDispWidth < picHeight/picWidth) {
-			pixelsPerElem = picHeight/dDispHeight;
-			picWidthInElems = picWidth/pixelsPerElem;
-			firstRenderCol = (dDispWidth-picWidthInElems)/2;
+		if (dispHeight/dispWidth < pic.getHeight()/pic.getWidth()) {
+			pixelsPerElem = pic.getHeight()/(dispHeight * 7);
+			double picWidthInElems = pic.getWidth()/pixelsPerElem;
+			firstRenderCol = ((dispWidth * 7)-picWidthInElems)/2;
 			lastRenderCol = firstRenderCol+picWidthInElems-1;
 		} else {
-			pixelsPerElem = picWidth/dDispWidth;
-			picHeightInElems = picHeight/pixelsPerElem;
-			firstRenderRow = (dDispHeight-picHeightInElems)/2;
+			pixelsPerElem = pic.getWidth()/(dispWidth * 7);
+			double picHeightInElems = pic.getHeight()/pixelsPerElem;
+			firstRenderRow = ((dispHeight * 7)-picHeightInElems)/2;
 			lastRenderRow = firstRenderRow+picHeightInElems-1;
 		}
 
@@ -162,7 +160,7 @@ public class MainController {
 	 * Flytta texten ett steg till vänster
 	 * @throws WrongArrayLengthException
 	 */
-	public void shiftLeft() throws WrongArrayLengthException {
+	public void shiftTextLeft() throws WrongArrayLengthException {
 		// Håll reda på vilken rad som är nästa att ritas
 		nextColRight.increase();
 		nextColLeft.increase();
@@ -172,7 +170,7 @@ public class MainController {
 			// Om texten är bredare än vad ColorDisplay är,
 			if (arrText[0].length > arrFore[0].length) {
 
-				int textColA7x7Index = nextColRight.getCounter()/7,
+				int		textColA7x7Index = nextColRight.getCounter()/7,
 						textColElemIndex = nextColRight.getCounter()%7,
 						textRowA7x7Index = rowIndex.getCounter()/7,
 						textRowElemIndex = rowIndex.getCounter()%7;
@@ -204,7 +202,7 @@ public class MainController {
 	 * Flytta texten ett steg till höger
 	 * @throws WrongArrayLengthException
 	 */
-	public void shiftRight() throws WrongArrayLengthException {
+	public void shiftTextRight() throws WrongArrayLengthException {
 		// Håll reda på vilken rad som är nästa att ritas
 		nextColRight.decrease();
 		nextColLeft.decrease();
@@ -214,7 +212,7 @@ public class MainController {
 			// Om texten är bredare än vad ColorDisplay är,
 			if (arrText[0].length > arrFore[0].length) {
 
-				int textColA7x7Index = nextColLeft.getCounter()/7,
+				int     textColA7x7Index = nextColLeft.getCounter()/7,
 						textColElemIndex = nextColLeft.getCounter()%7,
 						textRowA7x7Index = rowIndex.getCounter()/7,
 						textRowElemIndex = rowIndex.getCounter()%7;
@@ -244,7 +242,7 @@ public class MainController {
 	 * Flytta texten ett steg uppåt
 	 * @throws WrongArrayLengthException
 	 */
-	public void shiftUp() throws WrongArrayLengthException {
+	public void shiftTextUp() throws WrongArrayLengthException {
 		// Håll reda på vid vilket rad-index texten är för närvarande
 		rowIndex.decrease();
 
@@ -259,7 +257,7 @@ public class MainController {
 	 * Flytta texten ett steg nedåt
 	 * @throws WrongArrayLengthException
 	 */
-	public void shiftDown() throws WrongArrayLengthException {
+	public void shiftTextDown() throws WrongArrayLengthException {
 		// Håll reda på vid vilket rad-index texten är för närvarande
 		rowIndex.increase();
 
