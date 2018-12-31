@@ -111,6 +111,26 @@ public class Array7x7 {
 		return ny;
 	}
 	
+		public Array7 shiftLeft(Array7 a7) { // behöver bara jobba i kolumner pga vänster och höger ej upp och ned
+		Array7 retArray7 = this.getCol(0);
+		for (int i = 0; i < array2.length-1; i++) {
+			this.setCol(i, this.getCol(i + 1)); //stoppar in värden från en pos (till höger om den pos vi jobbar med)
+			//i den pos vi jobbar med, dvs shiftar vänster
+		}
+		this.setCol(6, a7);
+		return retArray7;
+	}
+
+
+	public Array7 shiftRight(Array7 a7) {
+		Array7 retArray7 = this.getCol(0);
+		for (int i = 0; i<array2.length-1; i++) {
+			this.setCol(i, this.getCol(i -1));
+		}
+		this.setCol(6, a7);
+		return retArray7;
+	}
+	
 	public static void main(String[]args) {
 		Array7x7 jaja = new Array7x7();
 		System.out.println(Arrays.deepToString(jaja.toIntArray()));
