@@ -131,6 +131,24 @@ public class Array7x7 {
 		return retArray7;
 	}
 	
+		public Array7 shiftUp(Array7 a7) {
+		Array7 retArray7 = this.getRow(0);
+		for (int i = 0; i < array2.length - 1; i++) {
+			this.setRow(i, this.getRow(i + 1));
+		}
+		this.setRow(6, a7);
+		return retArray7;
+	}
+
+	public Array7 shiftDown(Array7 a7) {
+		Array7 retArray7 = this.getRow(0);
+		for (int i = 0; i < array2.length - 1; i++) {
+			this.setRow(i, this.getRow(i - 1));
+		}
+		this.setRow(6, a7);
+		return retArray7;
+	}
+	
 	public static void main(String[]args) {
 		Array7x7 jaja = new Array7x7();
 		System.out.println(Arrays.deepToString(jaja.toIntArray()));
