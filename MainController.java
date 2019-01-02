@@ -103,32 +103,38 @@ public class MainController {
 		fillArray(arrBack, backgroundColor); // Fyll bakgrunden med färgen backgroundColor
 
 		// Skapa de variabler som kommer behövas
-		double  firstRenderRow = 0, lastRenderRow = (dispHeight * 7) - 1,
-				firstRenderCol = 0, lastRenderCol = (dispWidth * 7) - 1,
-				pixelsPerElem, x, y;
+		int		firstRenderRow = 0, lastRenderRow = (dispHeight * 7) - 1,
+				firstRenderCol = 0, lastRenderCol = (dispWidth * 7) - 1;
+		double	pixelsPerElem, x, y;
 
 		/* Ta reda på om displayens höjd/bredd-förhållande är större eller mindre än bildens
 		 * och initiera variablerna därefter.
 		 */
 		if (dispHeight/dispWidth < pic.getHeight()/pic.getWidth()) {
-			pixelsPerElem = pic.getHeight()/(dispHeight * 7);
+			pixelsPerElem = (double) pic.getHeight()/(dispHeight * 7);
 			double picWidthInElems = pic.getWidth()/pixelsPerElem;
-			firstRenderCol = ((dispWidth * 7)-picWidthInElems)/2;
-			lastRenderCol = firstRenderCol+picWidthInElems-1;
+			firstRenderCol =(int) ((dispWidth * 7)-picWidthInElems)/2;
+			lastRenderCol = (int) (firstRenderCol+picWidthInElems-1);
 		} else {
-			pixelsPerElem = pic.getWidth()/(dispWidth * 7);
+			pixelsPerElem = (double) pic.getWidth()/(dispWidth * 7);
 			double picHeightInElems = pic.getHeight()/pixelsPerElem;
-			firstRenderRow = ((dispHeight * 7)-picHeightInElems)/2;
-			lastRenderRow = firstRenderRow+picHeightInElems-1;
+			firstRenderRow = (int) ((dispHeight * 7)-picHeightInElems)/2;
+			lastRenderRow = (int) (firstRenderRow+picHeightInElems-1);
 		}
 
-		for (double row = firstRenderRow; row <= lastRenderRow; row++)
-			for (double col = firstRenderCol; col <= lastRenderCol; col++) {
+		System.out.println("fRC: " + firstRenderCol + "lRC: " + lastRenderCol + "fRR: " + firstRenderRow + ", lRR: " + lastRenderRow);
+
+		for (int row = firstRenderRow; row <= lastRenderRow; row++)
+			for (int col = firstRenderCol; col <= lastRenderCol; col++) {
 				x = (col-firstRenderCol)*pixelsPerElem;
 				y = (row-firstRenderRow)*pixelsPerElem;
 				int color = pic.getAverageColor(x, y, x+pixelsPerElem, y+pixelsPerElem);
-				arrBack[(int)Math.round(row)/7][(int)Math.round(col)/7].setElement(
-						(int)Math.round(row)%7, (int)Math.round(col)%7, color);
+				try {
+					arrBack[(int)Math.round(row)/7][(int)Math.round(col)/7].setElement(
+							(int)Math.round(row)%7, (int)Math.round(col)%7, color);
+				} catch (Exception e) {
+					System.out.println(e.toString() + ", Row: " + row + ", Col: " + col);
+				}
 			}
 	}
 
@@ -160,7 +166,7 @@ public class MainController {
 	 * Flytta texten ett steg till vänster
 	 * @throws WrongArrayLengthException
 	 */
-	public void shiftTextLeft() throws WrongArrayLengthException {
+	public void shiftTextLeft() {
 		// Håll reda på vilken rad som är nästa att ritas
 		nextColRight.increase();
 		nextColLeft.increase();
@@ -202,7 +208,7 @@ public class MainController {
 	 * Flytta texten ett steg till höger
 	 * @throws WrongArrayLengthException
 	 */
-	public void shiftTextRight() throws WrongArrayLengthException {
+	public void shiftTextRight() {
 		// Håll reda på vilken rad som är nästa att ritas
 		nextColRight.decrease();
 		nextColLeft.decrease();
@@ -242,7 +248,7 @@ public class MainController {
 	 * Flytta texten ett steg uppåt
 	 * @throws WrongArrayLengthException
 	 */
-	public void shiftTextUp() throws WrongArrayLengthException {
+	public void shiftTextUp() {
 		// Håll reda på vid vilket rad-index texten är för närvarande
 		rowIndex.decrease();
 
@@ -257,7 +263,7 @@ public class MainController {
 	 * Flytta texten ett steg nedåt
 	 * @throws WrongArrayLengthException
 	 */
-	public void shiftTextDown() throws WrongArrayLengthException {
+	public void shiftTextDown() {
 		// Håll reda på vid vilket rad-index texten är för närvarande
 		rowIndex.increase();
 
