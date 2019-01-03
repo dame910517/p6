@@ -18,35 +18,30 @@ public class MainController {
 	private int dispHeight;
 	private int dispWidth;
 	private Random rand = new Random();
-	private Display display;
 
 	/**
 	 * Konstruktor
 	 */
 	public MainController() {
 
-		dispWidth = 8;
-		dispHeight = 8;
-		String input = "Test";
-
-		arrDisp = new Array7x7[dispHeight][dispWidth];
-		arrBack = new Array7x7[dispHeight][dispWidth];
-		arrFore = new Array7x7[dispHeight][dispWidth];
-		initiateArray(arrDisp);
-		initiateArray(arrBack);
-		initiateArray(arrFore);
-
-		fillArray(arrBack, Color.BLACK);
-		fillArray(arrFore, Color.TRANSPARENT);
+//		arrDisp = new Array7x7[dispHeight][dispWidth];
+//		arrBack = new Array7x7[dispHeight][dispWidth];
+//		arrFore = new Array7x7[dispHeight][dispWidth];
+//		initiateArray(arrDisp);
+//		initiateArray(arrBack);
+//		initiateArray(arrFore);
+//
+//		fillArray(arrBack, Color.BLACK);
+//		fillArray(arrFore, Color.TRANSPARENT);
 
 		// Get text
 		//arrText = Characters.translate(input, Color.TRANSPARENT, Color.RED);
-		setText(input, Color.TRANSPARENT, Color.RED);
+		//setText(input, Color.TRANSPARENT, Color.RED);
 
 		// Apply the text on the foreground
-		transferArray(arrFore, arrText);
+		//transferArray(arrFore, arrText);
 
-		display = new Display(this);
+		//display = new Display(this);
 	}
 
 	/**
@@ -294,16 +289,15 @@ public class MainController {
 	 * Sätter höjden på skärmen
 	 * @param height Höjden på skärmen i Array7x7-objekt
 	 */
-	public void setDisplayHeight(int height) {
+	public void setDisplaySize(int height, int width) {
 		dispHeight = height;
-	}
-
-	/**
-	 * Sätter bredden på skärmen
-	 * @param height Bredden på skärmen i Array7x7-objekt
-	 */
-	public void setDisplayWidth(int width) {
 		dispWidth = width;
+		arrDisp = new Array7x7[dispHeight][dispWidth];
+		arrBack = new Array7x7[dispHeight][dispWidth];
+		arrFore = new Array7x7[dispHeight][dispWidth];
+		initiateArray(arrDisp);
+		initiateArray(arrBack);
+		initiateArray(arrFore);
 	}
 
 	/**
@@ -318,9 +312,9 @@ public class MainController {
 	 * Hämtar Display-objektet som MainController använder
 	 * @return
 	 */
-	private Display getDisplay() {
-		return display;
-	}
+//	private Display getDisplay() {
+//		return display;
+//	}
 
 	/**
 	 * Sätter texten som ska rullar över skärmen med standardfärger (vit med genomskinlig bakgrund)
@@ -345,14 +339,5 @@ public class MainController {
 		nextColLeft = new LoopingCounter(arrText[0].length*7-1);
 		rowIndex = new LoopingCounter(dispHeight*7-1);
 
-	}
-
-	public static void main(String[] args) {
-		MainController mc = new MainController();
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(mc.getDisplay());
-		frame.pack();
-		frame.setVisible(true);
 	}
 }
