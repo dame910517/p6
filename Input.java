@@ -4,10 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class Input extends JPanel {
+public class Input extends JPanel implements ActionListener {
 	private JPanel mainPan = new JPanel();
 	private JPanel upper = new JPanel();
 	private JPanel bottom = new JPanel();
@@ -35,6 +37,10 @@ public class Input extends JPanel {
 	
 	private Font font = new Font( "SansSerif", Font.PLAIN, 16 );
 	
+	private String textCol;
+	
+	private static Controller controller;
+	
 	public void getRightArray() {
 		JTextField[][] rightArray = new JTextField[7][1];
 		for(int row = 0; row < rightArray.length; row++) {
@@ -59,7 +65,13 @@ public class Input extends JPanel {
 		}
 	}
 	
-	public Input() {
+	public void getTextFromColField() {
+		textCol = colNbrText.getText();
+	}
+	
+	public Input(Controller controller) {
+		this.controller = controller;
+		
 		setPreferredSize(new Dimension (600, 500));
 		setLayout(new BorderLayout(0,0));
 		
@@ -85,8 +97,7 @@ public class Input extends JPanel {
 		rightArrayen.setPreferredSize(new Dimension(40,380));
 		
 		downArr.setPreferredSize(new Dimension(480,80));
-		downArrayen.setPreferredSize(new Dimension(400,40));
-		
+		downArrayen.setPreferredSize(new Dimension(400,40));	
 		
 		add(mainPan, BorderLayout.WEST);
 		
@@ -98,7 +109,7 @@ public class Input extends JPanel {
 		upper.add(upperColSpace, BorderLayout.NORTH);
 		upperColSpace.add(colNbr, BorderLayout.NORTH);
 		upperColSpace.add(colNbrText, BorderLayout.NORTH);
-		upper.add(readCol, BorderLayout.SOUTH);
+		upper.add(readCol, BorderLayout.SOUTH); //knappen som aktiverar contr readCol
 		upper.add(writeCol, BorderLayout.SOUTH);
 		
 		mainPan.add(bottom, BorderLayout.SOUTH);
@@ -110,10 +121,20 @@ public class Input extends JPanel {
 		
 		rightArr.add(rightArrayen, BorderLayout.CENTER);
 		downArr.add(downArrayen, BorderLayout.WEST);
+		
+		readCol.addActionListener(this);
+	}
+	
+	public void actionPerformed(ActionEvent e) { 
+		
+		if( e.getSource() == readCol) {
+			getTextFromColField();
+			controller.readColumn(Integer.parseInt(textCol));
+		}
 	}
 	
 	public static void main(String[]args) {
-		Input input = new Input();
+		Input input = new Input(controller);
 		JFrame frame = new JFrame("Array7x7 input");
 		input.getRightArray();
 		input.getDownArray();

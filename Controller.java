@@ -27,8 +27,14 @@ public class Controller {
 			{Color.TRANSPARENT,Color.WHITE,Color.TRANSPARENT,Color.TRANSPARENT,Color.TRANSPARENT,Color.WHITE,Color.TRANSPARENT}};
 	private int[][] stamp = new int[7][7];
 	
-	private Array7x7 array;
+	private Array7x7 array = new Array7x7();
 	private Viewer viewer;
+	
+	public Controller(Viewer viewer) {
+	this.viewer = viewer;
+	array.setArray(charA);
+	viewer.setCenterArray(array);
+	}
 	
 	public void getArray7x7() {
 
@@ -39,7 +45,8 @@ public class Controller {
 	}
 	
 	public void readColumn(int col) {
-		
+		Array7 ret = array.getCol(col);
+		viewer.setArrayLeftColumn(ret);
 	}
 	
 	public void writeRow(int row, Array7 arr7) {

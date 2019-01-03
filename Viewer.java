@@ -28,9 +28,6 @@ public class Viewer extends JPanel {
 	private JPanel sydPanel = new JPanel();
 	private JPanel southRowPanel = new JPanel();
 	private JPanel centerPanel = new JPanel();
-	
-	
-
 
 	private Font font = new Font( "SansSerif", Font.PLAIN, 16 );
 
@@ -53,37 +50,46 @@ public class Viewer extends JPanel {
 	private JLabel bottomRow7 = new JLabel();
 	
 	private Array7x7 array;
+	
+	private JLabel[][] centerArray = new JLabel[7][7];
+	private JLabel[] leftArray = new JLabel[7];
+	private JLabel[][] southArray = new JLabel[1][7];
 
 	//Array7x7
 	
-	public void setArray7x7() {
-		JLabel[][] centerArray = new JLabel[7][7];
-		int[][] array2 = array.toIntArray();
-		int temp = 0;
+	public void initiateArray7x7() {
 		for(int row = 0; row < centerArray.length; row++) {
 			for(int col = 0; col < centerArray[row].length; col ++) {
 				centerArray[row][col] = new JLabel();
 				centerArray[row][col].setBorder(BorderFactory.createMatteBorder(7, 10, 7, 10, java.awt.Color.WHITE));
 				centerArray[row][col].setFont(font);
-	}
-	}
-		for(int row = 0; row < centerArray.length; row++) {
-			for(int col = 0; col < centerArray[row].length; col ++) {
-				array2[row][col] = temp;
-				centerArray[row][col].setText(String.valueOf(temp));
 				panel.add(centerArray[row][col]);
 	}
-		}}
-
-	public void getArrayLeftColumn() {
-		JLabel[][] leftArray = new JLabel[7][1];
-		for(int row = 0; row < leftArray.length; row++) {
-			for(int col = 0; col < leftArray[row].length; col ++) {
-				leftArray[row][col] = new JLabel("B");
-				leftArray[row][col].setBorder(BorderFactory.createMatteBorder(7, 10, 7, 10, java.awt.Color.WHITE));
-				leftArray[row][col].setFont(font);
-				leftColumn.add(leftArray[row][col]);
+}
+}
+	
+	public void setCenterArray(Array7x7 array7x7) {
+		for(int row = 0; row < centerArray.length; row++) {
+			for(int col = 0; col < centerArray[row].length; col ++) {
+				centerArray[row][col].setText(String.valueOf(array7x7.getElement(row,col)));
 			}
+	}
+	}
+
+	public void initiateArrayLeftColumn() {
+		for(int row = 0; row < leftArray.length; row++) {
+				leftArray[row] = new JLabel();
+				// leftArray[i].setText(array7.getElement(i));
+				//leftArray[row][col] = array7[i][j];
+				leftArray[row].setBorder(BorderFactory.createMatteBorder(7, 10, 7, 10, java.awt.Color.WHITE));
+				leftArray[row].setFont(font);
+				leftColumn.add(leftArray[row]);
+			}
+		}
+	
+	public void setArrayLeftColumn(Array7 array7) {
+		for(int i = 0; i < leftArray.length; i++) {
+			leftArray[i].setText(String.valueOf(array7.getElement(i)));
 		}
 	}
 
@@ -110,7 +116,11 @@ public class Viewer extends JPanel {
 			}
 		}
 	}
+
 	public Viewer() {
+		initiateArrayLeftColumn();
+		initiateArray7x7();
+		getArraySouthRow();
 		setPreferredSize(new Dimension (600, 500));
 		setLayout(new BorderLayout(0,0));
 		
@@ -149,13 +159,12 @@ public class Viewer extends JPanel {
 	public static void main(String[]args) {
 		Viewer viewer = new Viewer();
 		JFrame frame = new JFrame("Array7x7 viewer");
-		viewer.getArrayLeftColumn();
-		viewer.setArray7x7();
+		viewer.initiateArrayLeftColumn();
+		viewer.initiateArray7x7();
 		viewer.getArraySouthRow();
 		frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		frame.add( viewer );
 		frame.pack();
 		frame.setVisible( true );
-
 	}
 }
