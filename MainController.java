@@ -58,8 +58,8 @@ public class MainController {
 	 * Fyller en Array7x7 2D-array med slumpmässigfa färger
 	 * @param array Den array som ska fyllas
 	 */
-	private void fillArrayRandom(Array7x7[][] array) {
-		for (Array7x7[] rowA7x7: array)
+	private void fillArrayRandom() {
+		for (Array7x7[] rowA7x7: arrBack)
 			for (Array7x7 a7x7: rowA7x7)
 				for (int rowElem = 0; rowElem < 7; rowElem++)
 					for (int colElem = 0; colElem < 7; colElem++)
