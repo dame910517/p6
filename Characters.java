@@ -1,6 +1,5 @@
 package p6;
 
-import java.awt.Color;
 import java.util.Arrays;
 
 public class Characters {
@@ -877,10 +876,10 @@ public class Characters {
 	}
 
 	public static Array7x7 hastag() {
-		return hastag(Color.WHITE, Color.BLACK);
+		return hashtag(Color.WHITE, Color.BLACK);
 	}
 
-	public static Array7x7 hastag(int O, int X) {
+	public static Array7x7 hashtag(int O, int X) {
 		int[][] res = {
 				{O, O, O, O, O, O, O},
 				{O, O, X, O, X, O, O},
