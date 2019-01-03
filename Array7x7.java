@@ -7,15 +7,7 @@ public class Array7x7 {
 	private Array7 array7 = new Array7();
 
 	public Array7x7() {
-		array2 = new int[][] {
-			{1, 8, 4, 6, 9, 0, 0},
-			{2, 9, 0, 6, 8, 2, 0},
-			{2, 5, 0, 6, 5, 9, 0},
-			{6, 1, 0, 9, 4, 4, 0},
-			{8, 6, 2, 6, 5, 9, 0},
-			{7, 5, 0, 6, 1, 8, 0},
-			{1, 0, 0, 6, 1, 9, 0},
-		};
+		array2 = new int[][];
 	}
 
 	public Array7x7(Array7x7 array7x7) {
@@ -23,12 +15,8 @@ public class Array7x7 {
 		setArray(array2);
 	}
 
-	public Array7x7(int[][] array) { 
-		for (int i = 0; i < array2.length; i++) {
-			for (int j = 0; j < array2[0].length; j++) {
-				this.array2[i][j] = array2[i][j]++;
-			}
-		}
+	public Array7x7(int[][] array2) { 
+		this.array2 = array2.clone(); 
 	}
 
 	public void setElement(int row, int col, int value) {
