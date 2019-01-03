@@ -7,7 +7,7 @@ public class Array7x7 {
 	private Array7 array7 = new Array7();
 
 	public Array7x7() {
-		array2 = new int[][];
+		array2 = new int[7][7];
 	}
 
 	public Array7x7(Array7x7 array7x7) {
