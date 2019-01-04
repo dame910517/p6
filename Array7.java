@@ -21,18 +21,13 @@ public class Array7 {
 	}
 
 	public void setElement(int pos, int value) {
-		if (pos < array.length && pos > 0) {
-			array[pos] = value; 
-		}
+		array[pos] = value;
+
 	}
 
 	public int getElement(int pos) {
-		try {
-			return array[pos];
+		return array[pos];
 
-		} catch (NullPointerException e) {
-			return 0;
-		}
 	}
 
 
