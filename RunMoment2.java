@@ -3,8 +3,8 @@ package p6;
 import javax.swing.JFrame;
 
 public class RunMoment2 {
-	
-	
+
+
 	public static void main(String[]args) {
 		Viewer viewer = new Viewer();
 		Controller controller = new Controller(viewer);
@@ -15,11 +15,12 @@ public class RunMoment2 {
 		frameInput.add( input );
 		frameInput.pack();
 		frameInput.setVisible( true );
+		frameInput.setLocation(605, 0);
 		frameViewer.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		frameViewer.add( viewer );
 		frameViewer.pack();
 		frameViewer.setVisible( true );
 	}
-	
+
 
 }
