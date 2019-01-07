@@ -7,10 +7,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.*;
 
 public class Display extends JPanel {
+	private Timer timer;
 
 	private ImageIcon imgSetText = new ImageIcon("Images/settext2.jpg");
 	private ImageIcon imgChooseImage = new ImageIcon("Images/chooseimage.jpg");
@@ -36,13 +39,14 @@ public class Display extends JPanel {
 	private JButton btnSetText = new JButton( imgSetText );
 	private JButton btnBigRight = new JButton( imgChooseImage );
 
-	private boolean rolling = false;
-
 	private MainController mc;
-	private static ColorDisplay cd = new ColorDisplay(7,10,Color.WHITE,Color.BLACK,1,10);
+	private ColorDisplay cd = new ColorDisplay(7,10,Color.WHITE,Color.BLACK,1,10);
 
 	public Display( MainController mc ) {
 		this.mc = mc; 
+		mc.setDisplaySize( 7, 10 );
+		mc.fillArrayRandom();
+		mc.finalizeDisplayArray();
 
 		setPreferredSize( new Dimension ( 755, 630 ) );
 		setLayout( new BorderLayout() );
@@ -86,23 +90,6 @@ public class Display extends JPanel {
 		
 
 	}
-	public void frameInsertText () {
-		JPanel panel = new JPanel();
-		JPanel panelSouth = new JPanel();
-		JTextField tf = new JTextField("H");
-		JLabel lbl = new JLabel("Insert the text you wish to display");
-		panel.setLayout( new BorderLayout () );
-		panel.setPreferredSize( new Dimension( 200, 200 ) );
-		panel.add( lbl, BorderLayout.NORTH );
-		panel.add( tf, BorderLayout.CENTER );
-		panel.add( panelSouth, BorderLayout.SOUTH );
-		JFrame frame = new JFrame("Title");
-		frame.add(panel);
-		frame.pack();
-		frame.setVisible(true);
-		frame.setLayout( new BorderLayout() );
-
-	}
 	
 	public void addArray() {
 		Array7x7 array[][] = mc.getDisplayArray();
@@ -111,14 +98,36 @@ public class Display extends JPanel {
 				cd.setDisplay( array[row][col].toIntArray(), row, col );
 			}
 		}
+		cd.updateDisplay();
 	}
-
+	
+	public void pauseText() {
+	}
+	
+	private class Scroller extends TimerTask {
+		public Scroller( JButton btn ) {
+			
+		}
+		public void actionPerformed( ActionEvent e ) {
+			
+		}
+		@Override
+		public void run() {
+			
+		}
+		// konstruktor 
+		// ta emot jbutton-input
+		// scroll listener
+		// stoplistener
+		
+	}
+	
 	private class OpenDirectoryListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			int ret = fileChooser.showOpenDialog( null );
 			if( e.getSource() == btnBigRight ) {
 				if( ret == JFileChooser.APPROVE_OPTION ) {
-//					Picture picture = Picture ( fileChooser.getSelectedFile() );	
+					Picture picture = new Picture( fileChooser.getSelectedFile() );	
 				}
 			}
 		}
@@ -127,34 +136,41 @@ public class Display extends JPanel {
 	private class AL implements ActionListener { 
 		public void actionPerformed(ActionEvent e) {
 			if( e.getSource() == btnUpLeft ) {
-				//				mc.shiftLeft();
+				mc.shiftTextLeft();
+				
 			} else if( e.getSource() == btnUp ) {
-				//				mc.shiftUp();
+				mc.shiftTextUp();
+				
 			} else if( e.getSource() == btnUpRight ) {
-				//				mc.shiftUp();
-				//				mc.shiftRight();
+				mc.shiftTextUp();
+				mc.shiftTextRight();
+				
 			} else if( e.getSource() == btnLeft ) {
-				//mc.shiftLeft();
-
+				mc.shiftTextLeft();
+				
 			} else if( e.getSource() == btnCenter ) {
-
+				pauseText();
+				
 			} else if( e.getSource() == btnRight ) {
-				//mc.shiftRight();
+				mc.shiftTextRight();
 
 			} else if( e.getSource() == btnDownLeft ) {
-//				mc.shiftDown();
-//				mc.shiftLeft();
+				mc.shiftTextDown();
+				mc.shiftTextLeft();
 
 			} else if( e.getSource() == btnDown ) {
-				//				mc.shiftDown();
+				mc.shiftTextDown();
 
 			} else if( e.getSource() == btnDownRight ) {
-				//				mc.shiftDown();
-				//				mc.shiftRight();
+				mc.shiftTextDown();
+				mc.shiftTextRight();
 
 			} else if( e.getSource() == btnSetText ) {
 				String input = JOptionPane.showInputDialog(null, "Write the text you wish to display");
-//				mc.setText( input );
+				mc.setText( input );
+				mc.finalizeDisplayArray();
+				addArray();
+//				mc.fillArrayRandom();
 			}
 		}
 	}
