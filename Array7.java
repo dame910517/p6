@@ -37,7 +37,7 @@ public class Array7 {
 	}
 
 	public void setArray(int[] array) {
-		this.array = array;
+		this.array = array.clone();
 
 	}
 
