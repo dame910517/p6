@@ -51,10 +51,7 @@ public class Array7 {
 	
 
 	public int[] toIntArray() { // ny instans av int[] ska returneras
-		int[] array2 = new int[7];
-		for(int i = 0; i < array.length; i++) {
-			array2[i] = array[i];
-		}
-		return array2;
+
+		return array2.clone();
 	}
 }
