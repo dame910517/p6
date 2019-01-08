@@ -1,130 +1,196 @@
 package p6;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+
+import javax.swing.*; 
+
+import java.awt.*;
+import java.util.Random;
+
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 
-public class Test2UI extends JPanel {
-	private Array7x7 array;
+public class Test2UI extends JPanel
+{
+
+	private Controller2 controller;
+	
+	private JButton btnLeft, btnRight;
+	
+	private JTextField[] tfLeftColumn;
+	private JTextField[] tfRightColumn;
+	private JLabel[][] lblMiddleColumn;
+	
 	private Array7 leftColumn;
 	private Array7 rightColumn;
-	private JPanel pnLeft = new JPanel();
-	private JPanel pnRight = new JPanel();
-	private JPanel pnCenter = new JPanel();
-	private JPanel pnBottom = new JPanel();
-	private JButton bnLeft = new JButton("<- Move left <-");
-	private JButton bnRight = new JButton("-> Move right ->");
-	private JLabel[][] lbCenterArray = new JLabel[7][7];
-	private JTextField[] tfLeftArray = new JTextField[7];
-	private JTextField[] tfRightArray = new JTextField[7];
-	private Border bor = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK);
-	private Dimension dim = new Dimension(30, 30);
-
-	public Test2UI() {
-		try {
-		int[][] testC = {
-				{1,2,3,4,5,6,7},
-				{2,3,4,5,6,7,8},
-				{3,4,5,6,7,8,9},
-				{4,5,6,7,8,9,10},
-				{5,6,7,8,9,10,11},
-				{6,7,8,9,10,11,12},
-				{7,8,9,10,11,12,13}
-		};
-		int[] testL = {1,2,3,4,5,6,7};
-		int[] testR = {7,6,5,4,3,2,1};
-		array = new Array7x7(testC);
-		leftColumn = new Array7(testL);
-		rightColumn = new Array7(testR);
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-
+	private Array7x7 middleColumn;
+	
+	private JPanel leftPanel;
+	private JPanel rightPanel;
+	private JPanel middlePanel;
+	private JPanel lowerPanel;
+	
+	
+	
+	
+	public Test2UI(Array7 mLeftColumn, Array7 mRightColumn, Array7x7 mMiddleColumn)
+	{
+		//Panelen
 		setLayout(new BorderLayout());
+		setPreferredSize(new Dimension(300, 200));
+		
+		//Arrayer
+		this.leftColumn = mLeftColumn;
+		this.rightColumn = mRightColumn;
+		this.middleColumn = mMiddleColumn;
+		
+		//Paneler
+		this.leftPanel = new JPanel();
+		this.leftPanel.setLayout(new GridLayout(7, 1));
+		
+		this.rightPanel = new JPanel();
+		this.rightPanel.setLayout(new GridLayout(7, 1));
+		
+		this.middlePanel = new JPanel();
+		this.middlePanel.setLayout(new GridLayout(7, 7));
+		
+		this.lowerPanel = new JPanel(new GridLayout(1, 2));
+		
+		//Rader och kolumer
+		this.tfLeftColumn = new JTextField[7];
+		this.tfRightColumn = new JTextField[7];
+		this.lblMiddleColumn = new JLabel[7][7];
+		
+		MoveListener moveListener = new MoveListener();
 
-		pnLeft.setLayout(new GridLayout(7,1));
-		for (int i = 0; i < tfLeftArray.length; i++) {
-			JTextField tf = new JTextField("0", SwingConstants.CENTER);
-			tf.setBorder(bor);
-			tf.setPreferredSize(dim);
-			pnLeft.add(tf);
-			tfLeftArray[i] = tf;
+		this.btnLeft = new JButton("<- Move Left <-");
+		this.btnLeft.addActionListener(moveListener);
+		
+	    this.btnRight = new JButton("-> Move Right ->");
+	    this.btnRight.addActionListener(moveListener);
+	    
+
+	    this.lowerPanel.add(this.btnLeft);
+	    this.lowerPanel.add(this.btnRight);
+	    
+	    
+		//Inititerar och ger variabler
+		for(int i = 0; i < 7; i++)
+		{
+			this.tfLeftColumn[i] = new JTextField();			
+			this.tfLeftColumn[i].setText(Integer.toString(this.leftColumn.getElement(i)));			
+			this.tfLeftColumn[i].setPreferredSize(new Dimension(30, 30));			
+			this.leftPanel.add(this.tfLeftColumn[i]);
+			
+			this.tfRightColumn[i] = new JTextField();
+			this.tfRightColumn[i].setText(Integer.toString(this.rightColumn.getElement(i)));
+			this.tfRightColumn[i].setPreferredSize(new Dimension(30, 30));
+			this.rightPanel.add(this.tfRightColumn[i]);
+
+			for(int j = 0; j <7; j++)
+			{
+				this.lblMiddleColumn[i][j] = new JLabel("");
+				this.lblMiddleColumn[i][j].setBorder(BorderFactory.createRaisedBevelBorder());
+				this.lblMiddleColumn[i][j].setText(Integer.toString(this.middleColumn.getElement(i, j)));
+				this.lblMiddleColumn[i][j].setPreferredSize(new Dimension(30, 30));
+				this.middlePanel.add(this.lblMiddleColumn[i][j]);
+			}
 		}
+		
+		
+	    
+	    
 
-		pnRight.setLayout(new GridLayout(7,1));
-		for (int i = 0; i < tfRightArray.length; i++) {
-			JTextField tf = new JTextField("0", SwingConstants.CENTER);
-			tf.setBorder(bor);
-			tf.setPreferredSize(dim);
-			pnRight.add(tf);
-			tfRightArray[i] = tf;
-		}
-
-		pnCenter.setLayout(new GridLayout(7, 7));
-		for (int i = 0; i < lbCenterArray.length; i++)
-			for (int j = 0; j < 7; j++) {
-				JLabel lb = new JLabel("0", SwingConstants.CENTER);
-				lb.setBorder(bor);
-				lb.setPreferredSize(dim);
-				pnCenter.add(lb);
-				lbCenterArray[i][j] = lb;
-			}	
-
-		pnBottom.setLayout(new GridLayout(1, 2));
-		MoveListener ml = new MoveListener();
-		bnLeft.addActionListener(ml);
-		pnBottom.add(bnLeft);
-		bnRight.addActionListener(ml);
-		pnBottom.add(bnRight);
-
-		add(pnLeft, BorderLayout.EAST);
-		add(pnRight, BorderLayout.WEST);
-		add(pnCenter, BorderLayout.CENTER);
-		add(pnBottom, BorderLayout.SOUTH);
-
-		setAll();
+	    this.add(this.middlePanel, BorderLayout.CENTER);
+	    this.add(this.leftPanel, BorderLayout.WEST);
+	    this.add(this.rightPanel, BorderLayout.EAST);
+	    this.add(this.lowerPanel, BorderLayout.SOUTH);
+	    
+	    
+	    
+	    
 	}
+	
+	public void update()
+	{
+		for(int i = 0; i < 7; i++)
+		{
+		
+			this.tfLeftColumn[i].setText(Integer.toString(this.leftColumn.getElement(i)));			
 
-	public void setAll() {
-		for (int i = 0; i < 7; i++)
-			tfLeftArray[i].setText(Integer.toString(leftColumn.getElement(i)));
+			this.tfRightColumn[i].setText(Integer.toString(this.rightColumn.getElement(i)));
 
-		for (int i = 0; i < 7; i++)
-			tfRightArray[i].setText(Integer.toString(rightColumn.getElement(i)));
 
-		for (int i = 0; i < array.toIntArray().length; i++)
-			for (int j = 0; j < array.toIntArray()[i].length; j++)
-				lbCenterArray[i][j].setText(Integer.toString(array.getElement(i, j)));
-	}
+			for(int j = 0; j <7; j++)
+			{
 
-	private class MoveListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			if (e.getSource().equals(bnLeft))
-				rightColumn = array.shiftLeft(leftColumn);
-			else if (e.getSource().equals(bnRight))
-				leftColumn = array.shiftRight(rightColumn);
-			setAll();
+				this.lblMiddleColumn[i][j].setText(Integer.toString(this.middleColumn.getElement(i, j)));
+
+			}
 		}
 	}
+	
+	
+	private class MoveListener implements ActionListener
+	{
 
-	public static void main(String[] args) {
-		Test2UI t2ui = new Test2UI();
-		JFrame frame1 = new JFrame("Test2UI");
-		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame1.add(t2ui);
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			
+			
+			if(e.getSource().equals(btnLeft))
+			{
+				rightColumn = middleColumn.shiftLeft(leftColumn);
+				
+			}
+			
+			else if(e.getSource().equals(btnRight))
+			{
+				leftColumn = middleColumn.shiftRight(rightColumn);
+			}
+			
+			update();
+		}
+		
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	public static void main(String [] args)
+	{
+		Random rng = new Random();
+		
+	    Array7 testArray1 = new Array7();
+	    
+	    
+	    for(int i = 0; i < 7; i++)
+		{
+			testArray1.setElement(i, rng.nextInt(9));
+			
+		}
+	    
+	    int[][] test = {{rng.nextInt(9), rng.nextInt(9), rng.nextInt(9), rng.nextInt(9), rng.nextInt(9), rng.nextInt(9), rng.nextInt(9)}, {7, 6, 6, 6, 7, 8, 9}, {7, 6, 6, 6, 7, 8, 9},{7, 6, 6, 6, 7, 8, 9},{7, 6, 6, 6, 7, 8, 9},{7, 6, 6, 6, 7, 8, 9},{7, 6, 6, 6, 7, 8, 9}};
+	    
+	    Array7x7 testArray2 = new Array7x7(test);
+		
+		Test2UI viewer = new Test2UI(testArray1, testArray1, testArray2);
+		
+		
+		
+		JFrame frame1 = new JFrame( "SSPViewer" );
+		frame1.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		frame1.add(viewer);
 		frame1.pack();
-		frame1.setVisible(true);
+		frame1.setVisible( true );
 	}
+	
+	
+	
 }
