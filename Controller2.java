@@ -93,12 +93,12 @@ public class Controller2
 	
 	public void moveLeft()
 	{
-		this.ui.setRightColumn(this.ui.getMiddleColumn().shiftLeft(this.ui.getRightColumn()));
+		this.ui.setLeftColumn(this.ui.getMiddleColumn().shiftLeft(this.ui.getRightColumn()));
 	}
 	
 	public void moveRight()
 	{
-		this.ui.setLeftColumn(this.ui.getMiddleColumn().shiftRight(this.ui.getLeftColumn()));;
+		this.ui.setRightColumn(this.ui.getMiddleColumn().shiftRight(this.ui.getLeftColumn()));;
 	}
 }
 
