@@ -27,8 +27,7 @@ public class RunMoment3
 			testArray2.setElement(i, rng.nextInt(9));
 			
 		}
-	    int[] s = {4, 6, 6, 6, 7, 8, 6};
-	    testArray4.setArray(s);
+
 	    
 	    int[][] test = {{7, 6, 6, 6, 7, 8, 9}, 
 	    		{2, 6, 6, 6, 7, 8, 9}, 
@@ -41,7 +40,7 @@ public class RunMoment3
 	    Array7x7 testArray3 = new Array7x7(test);
 		
 	   // Controller2 controller = new Controller2();
-		Controller2 controller = new Controller2(testArray4, testArray2, testArray3);
+		Controller2 controller = new Controller2(testArray1, testArray2, testArray3);
 		
 		
 		
