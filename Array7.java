@@ -44,7 +44,7 @@ public class Array7 {
 	public Array7 getArray() { // ny instans av Array7 ska returneras
 		Array7 ny = new Array7();
 		for (int i = 0; i < array.length; i++) {
-			array[i]  = ny.getElement(i);
+			ny.setElement(i, array[i]);
 		}
 		return ny;
 	}
