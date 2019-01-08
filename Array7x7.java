@@ -111,16 +111,16 @@ public class Array7x7 {
 
 
 	public Array7 shiftRight(Array7 a7) {
-		Array7 retArray7 = this.getCol(0);
-		for (int i = 0; i<array2.length-1; i++) {
-			this.setCol(i, this.getCol(i -1));
+		Array7 retArray7 = this.getCol(6);
+		for (int i = array2.length -1; i > 0; i--) {
+			this.setCol(i, this.getCol(i - 1));
 		}
-		this.setCol(6, a7);
+		this.setCol(0, a7);
 		return retArray7;
 	}
-	
-		public Array7 shiftUp(Array7 a7) {
-		Array7 retArray7 = this.getRow(0);
+
+	public Array7 shiftUp(Array7 a7) {
+		Array7 retArray7 = this.getRow(0);//spottar ut
 		for (int i = 0; i < array2.length - 1; i++) {
 			this.setRow(i, this.getRow(i + 1));
 		}
@@ -129,11 +129,11 @@ public class Array7x7 {
 	}
 
 	public Array7 shiftDown(Array7 a7) {
-		Array7 retArray7 = this.getRow(0);
-		for (int i = 0; i < array2.length - 1; i++) {
+		Array7 retArray7 = this.getRow(6);
+		for (int i = array2.length - 1; i < 0; i--) {
 			this.setRow(i, this.getRow(i - 1));
 		}
-		this.setRow(6, a7);
+		this.setRow(0, a7);
 		return retArray7;
 	}
 	
