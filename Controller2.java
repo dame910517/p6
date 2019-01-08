@@ -37,7 +37,7 @@ public class Controller2
 	}
 	
 	
-	ui = new Test2UI(this.leftColumn, this.rightColumn, this.array);
+	ui = new Test2UI(this.leftColumn, this.rightColumn, this.array, this);
 	
 	
 	}
@@ -50,7 +50,7 @@ public class Controller2
 	rightColumn = mRightColumn;
 	leftColumn = mLeftColumn;
 	
-	ui = new Test2UI(this.leftColumn, this.rightColumn, this.array);
+	ui = new Test2UI(this.leftColumn, this.rightColumn, this.array, this);
 	
 	
 	}
@@ -66,53 +66,39 @@ public class Controller2
 		return this.leftColumn;
 	}
 	
-	
-	
-	
-	
-	public static void main(String [] args)
+	public Test2UI getUI()
 	{
+		return this.ui;
+	}
+	
+	
+	public void update()
+	{
+		for(int i = 0; i < 7; i++)
+		{
+		
+			this.ui.getLeftTfColumn()[i].setText(Integer.toString(this.ui.getLeftColumn().getElement(i)));			
 
-		Random rng = new Random();
-		
-	    Array7 testArray1 = new Array7();
-	    Array7 testArray2 = new Array7();
-	    Array7 testArray4 = new Array7();
-	    
-	    for(int i = 0; i < 7; i++)
-		{
-			testArray1.setElement(i, rng.nextInt(9));
-			
+			this.ui.getRightTfColumn()[i].setText(Integer.toString(this.ui.getRightColumn().getElement(i)));
+
+
+			for(int j = 0; j <7; j++)
+			{
+
+				this.ui.getMiddleLblColumn()[i][j].setText(Integer.toString(this.ui.getMiddleColumn().getElement(i, j)));
+
+			}
 		}
-	    
-	    for(int i = 0; i < 7; i++)
-		{
-			testArray2.setElement(i, rng.nextInt(9));
-			
-		}
-	    int[] s = {4, 6, 6, 6, 7, 8, 6};
-	    testArray4.setArray(s);
-	    
-	    int[][] test = {{7, 6, 6, 6, 7, 8, 9}, 
-	    		{2, 6, 6, 6, 7, 8, 9}, 
-	    		{7, 51, 6, 6, 7, 8, 9},
-	    		{1, 6, 2, 6, 7, 8, 9},
-	    		{6, 1, 6, 6, 7, 8, 9},
-	    		{3, 6, 4, 6, 7, 8, 16},
-	    		{9, 6, 6, 6, 21, 8, 12}};
-	    
-	    Array7x7 testArray3 = new Array7x7(test);
-		
-	   // Controller2 controller = new Controller2();
-		Controller2 controller = new Controller2(testArray4, testArray2, testArray3);
-		
-		
-		
-		JFrame frame1 = new JFrame( "SSPViewer" );
-		frame1.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		frame1.add(controller.ui);
-		frame1.pack();
-		frame1.setVisible( true );
+	}
+	
+	public void moveLeft()
+	{
+		this.ui.setRightColumn(this.ui.getMiddleColumn().shiftLeft(this.ui.getRightColumn()));
+	}
+	
+	public void moveRight()
+	{
+		this.ui.setLeftColumn(this.ui.getMiddleColumn().shiftRight(this.ui.getLeftColumn()));;
 	}
 }
 

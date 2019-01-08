@@ -47,7 +47,7 @@ public class RunMoment3
 		
 		JFrame frame1 = new JFrame( "SSPViewer" );
 		frame1.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		frame1.add(controller.ui);
+		frame1.add(controller.getUI());
 		frame1.pack();
 		frame1.setVisible( true );
 	}

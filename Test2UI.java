@@ -34,8 +34,11 @@ public class Test2UI extends JPanel
 	
 	
 	
-	public Test2UI(Array7 mLeftColumn, Array7 mRightColumn, Array7x7 mMiddleColumn)
+	public Test2UI(Array7 mLeftColumn, Array7 mRightColumn, Array7x7 mMiddleColumn, Controller2 mController)
 	{
+		
+		this.controller = mController;
+		
 		//Panelen
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(300, 200));
@@ -112,26 +115,58 @@ public class Test2UI extends JPanel
 	    
 	}
 	
-	public void update()
+	
+	public JTextField[] getLeftTfColumn() 
 	{
-		for(int i = 0; i < 7; i++)
-		{
-		
-			this.tfLeftColumn[i].setText(Integer.toString(this.leftColumn.getElement(i)));			
-
-			this.tfRightColumn[i].setText(Integer.toString(this.rightColumn.getElement(i)));
-
-
-			for(int j = 0; j <7; j++)
-			{
-
-				this.lblMiddleColumn[i][j].setText(Integer.toString(this.middleColumn.getElement(i, j)));
-
-			}
-		}
+		return this.tfLeftColumn;
+	}
+	
+	public JTextField[] getRightTfColumn() 
+	{
+		return this.tfRightColumn;
+	}
+	
+	public JLabel[][] getMiddleLblColumn()
+	{
+	
+		return this.lblMiddleColumn;
+	}
+	
+	public Array7 getLeftColumn()
+	{
+		return this.leftColumn;
+	}
+	
+	public Array7 getRightColumn()
+	{
+		return this.rightColumn;
+	}
+	
+	public Array7x7 getMiddleColumn()
+	{
+		return this.middleColumn;
 	}
 	
 	
+	
+	//set
+	public void setLeftColumn(Array7 mLeftColumn)
+	{
+		this.leftColumn = mLeftColumn;
+	}
+	
+	public void setRightColumn(Array7 mRightColumn)
+	{
+		this.rightColumn = mRightColumn;
+	}
+	
+	public void setMiddleColumn(Array7x7 mMiddleColumn)
+	{
+		this.middleColumn = mMiddleColumn;
+	}
+	
+	
+
 	private class MoveListener implements ActionListener
 	{
 
@@ -142,55 +177,19 @@ public class Test2UI extends JPanel
 			
 			if(e.getSource().equals(btnLeft))
 			{
-				rightColumn = middleColumn.shiftLeft(leftColumn);
+				controller.moveLeft();
 				
 			}
 			
 			else if(e.getSource().equals(btnRight))
 			{
-				leftColumn = middleColumn.shiftRight(rightColumn);
+				controller.moveRight();
 			}
 			
-			update();
+			controller.update();
 		}
 		
 	}
 	
 
-	
-	
-	
-	
-	
-	
-	public static void main(String [] args)
-	{
-		Random rng = new Random();
-		
-	    Array7 testArray1 = new Array7();
-	    
-	    
-	    for(int i = 0; i < 7; i++)
-		{
-			testArray1.setElement(i, rng.nextInt(9));
-			
-		}
-	    
-	    int[][] test = {{rng.nextInt(9), rng.nextInt(9), rng.nextInt(9), rng.nextInt(9), rng.nextInt(9), rng.nextInt(9), rng.nextInt(9)}, {7, 6, 6, 6, 7, 8, 9}, {7, 6, 6, 6, 7, 8, 9},{7, 6, 6, 6, 7, 8, 9},{7, 6, 6, 6, 7, 8, 9},{7, 6, 6, 6, 7, 8, 9},{7, 6, 6, 6, 7, 8, 9}};
-	    
-	    Array7x7 testArray2 = new Array7x7(test);
-		
-		Test2UI viewer = new Test2UI(testArray1, testArray1, testArray2);
-		
-		
-		
-		JFrame frame1 = new JFrame( "SSPViewer" );
-		frame1.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		frame1.add(viewer);
-		frame1.pack();
-		frame1.setVisible( true );
-	}
-	
-	
-	
 }
