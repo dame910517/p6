@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 public class Array7x7 {
 	private int[][] array2;
-	private Array7 array7 = new Array7();
 
 	public Array7x7() {
 		array2 = new int[7][7];
@@ -25,17 +24,13 @@ public class Array7x7 {
 		}
 	}
 
-	public int getElement(int row, int col) { 
-		try {
-			return array2[row][col];
+	public int getElement(int row, int col) {
+		return array2[row][col];
 
-		} catch (NullPointerException e) {
-			return 0;
-		}
 	}
 
 //	Skapa metoder som kan skriva och läsa rader och kolumner:
-
+//hämtar värden från int[][] och stoppar in i Array7 typen
 	public void setRow(int row, Array7 theRow) { 
 		for (int i = 0; i < array2.length; i++) {
 			array2[row][i] = theRow.getElement(i);
@@ -67,19 +62,14 @@ public class Array7x7 {
 //	Skapa metoder som kan skriva och läsa samliga element:
 
 	public void setArray(Array7x7 array7x7) { //måste skriva begränsnig
-		for (int i = 0; i < array2.length ; i++) {
-			for (int j = 0; j < array2[0].length ; j++) {
-				int ny = array7x7.getElement(i, j);
-				array2[i][j] = ny;
-			}
-		}
+		array2 = array7x7.toIntArray();
 	}
 
 	public void setArray(int[][] array) {//måste skriva begränsnig
-		this.array2 = array;
+		this.array2 = array.clone();
 	}
 
-	public Array7x7 getArray() { // ny instans av int[] ska returneras
+	public Array7x7 getArray() { // ny instans av Array7x7 ska returneras
 		Array7x7 ny = new Array7x7();
 		for (int i = 0; i < array2.length ; i++) {
 			for (int j = 0; j < array2[0].length ; j++) {
@@ -89,7 +79,7 @@ public class Array7x7 {
 		return ny;
 	}
 
-	public int[][] toIntArray() { // ny instans av int[] ska returneras
+	public int[][] toIntArray() { // ny instans av int[][] ska returneras
 		int[][] ny = new int[7][7];
 		for (int i = 0; i < array2.length ; i++) {
 			for (int j = 0; j < array2[0].length ; j++) {
@@ -100,11 +90,11 @@ public class Array7x7 {
 	}
 	
 		public Array7 shiftLeft(Array7 a7) { // behöver bara jobba i kolumner pga vänster och höger ej upp och ned
-		Array7 retArray7 = this.getCol(0);
+		Array7 retArray7 = this.getCol(0);//sparar densom stoppar us så att den sparas , annars försvinner den
 		for (int i = 0; i < array2.length-1; i++) {
 			this.setCol(i, this.getCol(i + 1)); //stoppar in värden från en pos (till höger om den pos vi jobbar med)
 			//i den pos vi jobbar med, dvs shiftar vänster
-		}
+		}//får in en col och får ut en col, tar in ett a7 och stoppar in från parameter 
 		this.setCol(6, a7);
 		return retArray7;
 	}
@@ -136,9 +126,3 @@ public class Array7x7 {
 		this.setRow(0, a7);
 		return retArray7;
 	}
-	
-	public static void main(String[]args) {
-		Array7x7 jaja = new Array7x7();
-		System.out.println(Arrays.deepToString(jaja.toIntArray()));
-	}
-}
