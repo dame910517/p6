@@ -8,16 +8,14 @@ public class Array7 {
 	}
 
 	public Array7(Array7 array7) {
-		this(); 
 		setArray(array7);
 
 	}
 	
 
 	public Array7(int[] array) {
-		for (int i = 0; i < array.length; i++) {
-			this.array[i] = array[i]++;
-		}
+				this.array = array.clone();
+
 	}
 
 	public void setElement(int pos, int value) {
