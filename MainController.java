@@ -1,6 +1,5 @@
 package p6;
 
-import javax.swing.JFrame;
 import java.util.Random;
 
 /**
@@ -20,31 +19,6 @@ public class MainController {
 	private Random rand = new Random();
 
 	/**
-	 * Konstruktor
-	 */
-	public MainController() {
-
-//		arrDisp = new Array7x7[dispHeight][dispWidth];
-//		arrBack = new Array7x7[dispHeight][dispWidth];
-//		arrFore = new Array7x7[dispHeight][dispWidth];
-//		initiateArray(arrDisp);
-//		initiateArray(arrBack);
-//		initiateArray(arrFore);
-//
-//		fillArray(arrBack, Color.BLACK);
-//		fillArray(arrFore, Color.TRANSPARENT);
-
-		// Get text
-		//arrText = Characters.translate(input, Color.TRANSPARENT, Color.RED);
-		//setText(input, Color.TRANSPARENT, Color.RED);
-
-		// Apply the text on the foreground
-		//transferArray(arrFore, arrText);
-
-		//display = new Display(this);
-	}
-
-	/**
 	 * Metod för att initiera en 2D-array med Array7x7-objekt
 	 * @param array Den array som ska initieras
 	 */
@@ -58,7 +32,7 @@ public class MainController {
 	 * Fyller en Array7x7 2D-array med slumpmässigfa färger
 	 * @param array Den array som ska fyllas
 	 */
-	private void fillArrayRandom() {
+	public void fillArrayRandom() {
 		for (Array7x7[] rowA7x7: arrBack)
 			for (Array7x7 a7x7: rowA7x7)
 				for (int rowElem = 0; rowElem < 7; rowElem++)
@@ -67,7 +41,7 @@ public class MainController {
 	}
 
 	/**
-	 * Fyller en Array7x7 2D-array med 
+	 * Fyller en Array7x7 2D-array med en färg
 	 * @param array Den array som ska fyllas
 	 * @param color Färgen som ska användas, i formatet som beskrivs i Color-klassen i samma paket
 	 */
@@ -116,8 +90,6 @@ public class MainController {
 			firstRenderRow = (int) ((dispHeight * 7)-picHeightInElems)/2;
 			lastRenderRow = (int) (firstRenderRow+picHeightInElems-1);
 		}
-
-		System.out.println("fRC: " + firstRenderCol + "lRC: " + lastRenderCol + "fRR: " + firstRenderRow + ", lRR: " + lastRenderRow);
 
 		for (int row = firstRenderRow; row <= lastRenderRow; row++)
 			for (int col = firstRenderCol; col <= lastRenderCol; col++) {
@@ -254,6 +226,7 @@ public class MainController {
 				finalRow = arrFore[row][col].shiftUp(finalRow);
 		}
 	}
+
 	/**
 	 * Flytta texten ett steg nedåt
 	 * @throws WrongArrayLengthException
@@ -271,23 +244,9 @@ public class MainController {
 	}
 
 	/**
-	 *  Hämta bredden på skärmen
-	 *  @return Bredden på skärmen i Array7x7-objekt
-	 */
-	public int getDisplayHeight() {
-		return dispHeight;
-	}
-	/**
-	 * Hämtar höjden på skärmen
-	 * @return Höjden på skärmen i Array7x7-objekt
-	 */
-	public int getDisplayWidth() {
-		return dispWidth;
-	}
-
-	/**
-	 * Sätter höjden på skärmen
+	 * Sätter storleken på skärmen
 	 * @param height Höjden på skärmen i Array7x7-objekt
+	 * @param width Bredden på skärmen i Array7x7-objekt
 	 */
 	public void setDisplaySize(int height, int width) {
 		dispHeight = height;
@@ -308,14 +267,6 @@ public class MainController {
 		return arrDisp;
 	}
 
-	/** 
-	 * Hämtar Display-objektet som MainController använder
-	 * @return
-	 */
-//	private Display getDisplay() {
-//		return display;
-//	}
-
 	/**
 	 * Sätter texten som ska rullar över skärmen med standardfärger (vit med genomskinlig bakgrund)
 	 * @param input
@@ -331,13 +282,13 @@ public class MainController {
 	 * @param foreground Textfärgen 
 	 */
 	public void setText(String input, int background, int foreground) {
-		arrText = Characters.translate(input, background, foreground);
-		fillArray(arrFore, Color.TRANSPARENT);
-		transferArray(arrFore, arrText);
-		//nextColRight = (dispWidth * 7) - 1;
-		nextColRight = new LoopingCounter(0, (arrText[0].length*7) - 1, dispWidth*7-1);
-		nextColLeft = new LoopingCounter(arrText[0].length*7-1);
-		rowIndex = new LoopingCounter(dispHeight*7-1);
-
+		if (input != null) {
+			arrText = Characters.translate(input, background, foreground);
+			fillArray(arrFore, Color.TRANSPARENT);
+			transferArray(arrFore, arrText);
+			nextColRight = new LoopingCounter(0, (arrText[0].length*7) - 1, dispWidth*7-1);
+			nextColLeft = new LoopingCounter(arrText[0].length*7-1);
+			rowIndex = new LoopingCounter(dispHeight*7-1);
+		}
 	}
 }
