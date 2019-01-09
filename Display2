@@ -115,10 +115,6 @@ public class Display extends JPanel {
 		}
 }
 
-	// konstruktor
-	// ta emot jbutton-input
-	// scroll listener
-	// stoplistener
 	private class ScrollerTask extends TimerTask {
 			private JButton input;
 
