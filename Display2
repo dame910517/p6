@@ -15,6 +15,7 @@ import javax.swing.*;
 public class Display extends JPanel {
 	private Timer timer;
 
+
 	private ImageIcon imgSetText = new ImageIcon("Images/settext2.jpg");
 	private ImageIcon imgChooseImage = new ImageIcon("Images/chooseimage.jpg");
 
@@ -33,11 +34,12 @@ public class Display extends JPanel {
 	private JButton btnDown = new JButton("↓");
 	private JButton btnDownRight = new JButton("↘");
 
+
 	private JFileChooser fileChooser = new JFileChooser();
 
 	// Knappar för att sätta texten
-	private JButton btnSetText = new JButton(imgSetText);
-	private JButton btnBigRight = new JButton(imgChooseImage);
+	private JButton btnSetText = new JButton("Skriv in en text"); //JButton(imgSetText);
+	private JButton btnBigRight = new JButton("Välj en bild"); //(imgChooseImage);
 
 	private MainController mc;
 	private ColorDisplay cd = new ColorDisplay(7, 10, Color.WHITE, Color.BLACK, 1, 10);
@@ -45,7 +47,7 @@ public class Display extends JPanel {
 	public Display(MainController mc) {
 		this.mc = mc;
 		mc.setDisplaySize(7, 10);
-//		mc.fillArrayRandom();
+		mc.fillArrayRandom();
 		mc.finalizeDisplayArray();
 
 		setPreferredSize(new Dimension(755, 630));
@@ -102,18 +104,19 @@ public class Display extends JPanel {
 	}
 
 	public void pauseText() {
+		
 	}
 
-	
-	private class ScrollerListener implements Actionlistener {
+	//rullar ej
+	private class ScrollerListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {//
 
 			ScrollerTask task = new ScrollerTask((JButton)e.getSource());
-			Timer timer = new Timer();
-			timer.schedule(task,  0, 100);
-		
+			timer = new Timer();
+			timer.schedule(task,  100, 100);
+//			timer.scheduleExecutionTime();
 		}
-}
+	}
 
 	private class ScrollerTask extends TimerTask {
 			private JButton input;
@@ -126,40 +129,67 @@ public class Display extends JPanel {
 			public void run() {
 			if (input.equals(btnUpLeft)) {
 				mc.shiftTextLeft();
+				mc.shiftTextUp();
 
+				//sätter ny display, behövs pga att shifttextleft går tomma luckor där texten tidigare varit?
+				mc.finalizeDisplayArray();
+				addArray();
 			} else if (input.equals(btnUp)) {
 				mc.shiftTextUp();
+				
+				mc.finalizeDisplayArray();
+				addArray();
 
 			} else if (input.equals(btnUpRight)) {
 				mc.shiftTextUp();
 				mc.shiftTextRight();
+				
+				mc.finalizeDisplayArray();
+				addArray();
 
 			} else if (input.equals(btnLeft)) {
 				mc.shiftTextLeft();
+				
+				mc.finalizeDisplayArray();
+				addArray();
 
 			} else if (input.equals(btnCenter)) {
-				pauseText();
-
+				pauseText(); //nödvändig? kan ej bara ha timer.cancel? 
+				mc.finalizeDisplayArray();
+				addArray();
+				timer.cancel();
 			} else if (input.equals(btnRight)) {
 				mc.shiftTextRight();
+				
+				mc.finalizeDisplayArray();
+				addArray();
 
 			} else if (input.equals(btnDownLeft)) {
 				mc.shiftTextDown();
 				mc.shiftTextLeft();
+				
+				mc.finalizeDisplayArray();
+				addArray();
 
 			} else if (input.equals(btnDown)) {
 				mc.shiftTextDown();
+				
+				mc.finalizeDisplayArray();
+				addArray();
 
 			} else if (input.equals(btnDownRight)) {
 				mc.shiftTextDown();
 				mc.shiftTextRight();
+				
+				mc.finalizeDisplayArray();
+				addArray();
 
 			} else if (input.equals(btnSetText)) {
 				String input = JOptionPane.showInputDialog(null, "Write the text you wish to display");
 				mc.setText(input);
 				mc.finalizeDisplayArray();
 				addArray();
-//				mc.fillArrayRandom();
+				timer.cancel();
 			}
 			mc.getDisplayArray();
 		}
@@ -183,6 +213,7 @@ public class Display extends JPanel {
 		JFrame frame1 = new JFrame("Display");
 		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame1.add(display);
+		display.addArray();
 		frame1.setLocationRelativeTo(null);
 		frame1.pack();
 		frame1.setVisible(true);
