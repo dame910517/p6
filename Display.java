@@ -15,7 +15,6 @@ import javax.swing.*;
 public class Display extends JPanel {
 	private Timer timer;
 
-
 	private ImageIcon imgSetText = new ImageIcon("Images/settext2.jpg");
 	private ImageIcon imgChooseImage = new ImageIcon("Images/chooseimage.jpg");
 
@@ -34,12 +33,11 @@ public class Display extends JPanel {
 	private JButton btnDown = new JButton("↓");
 	private JButton btnDownRight = new JButton("↘");
 
-
 	private JFileChooser fileChooser = new JFileChooser();
 
-	// Knappar för att sätta texten
-	private JButton btnSetText = new JButton("Skriv in en text"); //JButton(imgSetText);
-	private JButton btnBigRight = new JButton("Välj en bild"); //(imgChooseImage);
+	// Knappar för att sätta text och bild
+	private JButton btnSetText = new JButton("Skriv in en text"); // JButton(imgSetText);
+	private JButton btnBigRight = new JButton("Välj en bild"); // (imgChooseImage);
 
 	private MainController mc;
 	private ColorDisplay cd = new ColorDisplay(7, 10, Color.WHITE, Color.BLACK, 1, 10);
@@ -53,9 +51,6 @@ public class Display extends JPanel {
 		setPreferredSize(new Dimension(755, 630));
 		setLayout(new BorderLayout());
 
-		// pnlArrows innehåller pilarna för att användaren ska kunna styra i vilken
-		// riktning
-		// texten rör sig över fönstret
 		pnlArrows.add(btnUpLeft);
 		pnlArrows.add(btnUp);
 		pnlArrows.add(btnUpRight);
@@ -90,6 +85,7 @@ public class Display extends JPanel {
 
 		OpenDirectoryListener odListener = new OpenDirectoryListener();
 		btnBigRight.addActionListener(odListener);
+		btnSetText.addActionListener(new DecideText());
 
 	}
 
@@ -103,99 +99,61 @@ public class Display extends JPanel {
 		cd.updateDisplay();
 	}
 
-	public void pauseText() {
-		
-	}
+	private class ScrollerListener implements ActionListener {// NÄR kollla vilken knapp
+		public void actionPerformed(ActionEvent e) {
 
-	//rullar ej
-	private class ScrollerListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {//
-
-			ScrollerTask task = new ScrollerTask((JButton)e.getSource());
+			ScrollerTask task = new ScrollerTask((JButton) e.getSource());
 			timer = new Timer();
-			timer.schedule(task,  100, 100);
-//			timer.scheduleExecutionTime();
+			timer.schedule(task, 100, 100);
 		}
 	}
 
 	private class ScrollerTask extends TimerTask {
-			private JButton input;
+		private JButton input;
 
-			public ScrollerTask(JButton input) {
-				this.input = input;
-			}
+		public ScrollerTask(JButton input) {
+			this.input = input;
+		}
 
-			@Override
-			public void run() {
-			if (input.equals(btnUpLeft)) {
+		@Override
+		public void run() {
+			if (input.equals(btnUpLeft)) {// kollar vilken knapp
 				mc.shiftTextLeft();
 				mc.shiftTextUp();
-
-				//sätter ny display, behövs pga att shifttextleft går tomma luckor där texten tidigare varit?
-				mc.finalizeDisplayArray();
-				addArray();
 			} else if (input.equals(btnUp)) {
 				mc.shiftTextUp();
-				
-				mc.finalizeDisplayArray();
-				addArray();
-
 			} else if (input.equals(btnUpRight)) {
 				mc.shiftTextUp();
 				mc.shiftTextRight();
-				
-				mc.finalizeDisplayArray();
-				addArray();
-
 			} else if (input.equals(btnLeft)) {
 				mc.shiftTextLeft();
-				
-				mc.finalizeDisplayArray();
-				addArray();
-
 			} else if (input.equals(btnCenter)) {
-				pauseText(); //nödvändig? kan ej bara ha timer.cancel? 
-				mc.finalizeDisplayArray();
-				addArray();
 				timer.cancel();
+				timer.purge();
 			} else if (input.equals(btnRight)) {
 				mc.shiftTextRight();
-				
-				mc.finalizeDisplayArray();
-				addArray();
-
 			} else if (input.equals(btnDownLeft)) {
 				mc.shiftTextDown();
 				mc.shiftTextLeft();
-				
-				mc.finalizeDisplayArray();
-				addArray();
-
 			} else if (input.equals(btnDown)) {
 				mc.shiftTextDown();
-				
-				mc.finalizeDisplayArray();
-				addArray();
-
 			} else if (input.equals(btnDownRight)) {
 				mc.shiftTextDown();
 				mc.shiftTextRight();
-				
-				mc.finalizeDisplayArray();
-				addArray();
-
-			} else if (input.equals(btnSetText)) {
-				String input = JOptionPane.showInputDialog(null, "Write the text you wish to display");
-				mc.setText(input);
-				mc.finalizeDisplayArray();
-				addArray();
-				timer.cancel();
 			}
-			mc.getDisplayArray();
+			mc.finalizeDisplayArray();
+			addArray();
 		}
 	}
 
-	
+	private class DecideText implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String input = JOptionPane.showInputDialog(null, "Write the text you wish to display");
+			mc.setText(input);
+			mc.finalizeDisplayArray();
+			addArray();
+		}
+	}
 
 	private class OpenDirectoryListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -207,6 +165,7 @@ public class Display extends JPanel {
 			}
 		}
 	}
+
 	public static void main(String[] args) {
 		MainController mc = new MainController();
 		Display display = new Display(mc);
@@ -219,3 +178,4 @@ public class Display extends JPanel {
 		frame1.setVisible(true);
 	}
 }
+
