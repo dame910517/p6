@@ -58,7 +58,7 @@ public class Display extends JPanel {
 		mc.setDisplaySize(7, 10);
 		mc.fillArrayRandom();
 		mc.finalizeDisplayArray();
-
+		addArray();
 		setPreferredSize(new Dimension(755, 630));
 		setLayout(new BorderLayout());
 
