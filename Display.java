@@ -14,6 +14,7 @@ import javax.swing.*;
 
 public class Display extends JPanel {
 	private Timer timer;
+	private boolean scrolling;
 
 	private ImageIcon imgSetText = new ImageIcon("Images/settext2.jpg");
 	private ImageIcon imgChooseImage = new ImageIcon("Images/chooseimage.jpg");
@@ -44,6 +45,7 @@ public class Display extends JPanel {
 
 	public Display(MainController mc) {
 		this.mc = mc;
+		scrolling = false;
 		mc.setDisplaySize(7, 10);
 		mc.fillArrayRandom();
 		mc.finalizeDisplayArray();
@@ -76,7 +78,6 @@ public class Display extends JPanel {
 		btnUp.addActionListener(listener);
 		btnUpRight.addActionListener(listener);
 		btnLeft.addActionListener(listener);
-		btnCenter.addActionListener(listener);
 		btnRight.addActionListener(listener);
 		btnDownLeft.addActionListener(listener);
 		btnDown.addActionListener(listener);
@@ -86,6 +87,7 @@ public class Display extends JPanel {
 		OpenDirectoryListener odListener = new OpenDirectoryListener();
 		btnBigRight.addActionListener(odListener);
 		btnSetText.addActionListener(new DecideText());
+		btnCenter.addActionListener(new Stop());
 
 	}
 
@@ -103,8 +105,17 @@ public class Display extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 
 			ScrollerTask task = new ScrollerTask((JButton) e.getSource());
+			pauseText();
 			timer = new Timer();
 			timer.schedule(task, 100, 100);
+		}
+	}
+
+	private void pauseText() {
+		if (scrolling == true) {
+			timer.cancel();
+			timer.purge();
+			scrolling = false;
 		}
 	}
 
@@ -127,9 +138,7 @@ public class Display extends JPanel {
 				mc.shiftTextRight();
 			} else if (input.equals(btnLeft)) {
 				mc.shiftTextLeft();
-			} else if (input.equals(btnCenter)) {
-				timer.cancel();
-				timer.purge();
+
 			} else if (input.equals(btnRight)) {
 				mc.shiftTextRight();
 			} else if (input.equals(btnDownLeft)) {
@@ -141,8 +150,16 @@ public class Display extends JPanel {
 				mc.shiftTextDown();
 				mc.shiftTextRight();
 			}
+			scrolling = true;
 			mc.finalizeDisplayArray();
 			addArray();
+
+		}
+	}
+
+	private class Stop implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			pauseText();
 		}
 	}
 
@@ -161,10 +178,15 @@ public class Display extends JPanel {
 			if (e.getSource() == btnBigRight) {
 				if (ret == JFileChooser.APPROVE_OPTION) {
 					Picture picture = new Picture(fileChooser.getSelectedFile());
+					mc.addPictureToBackground(picture, Color.TRANSPARENT);
+					mc.finalizeDisplayArray();
+					addArray();
 				}
 			}
 		}
 	}
+
+	// boolean, om scrol is true , stäng av
 
 	public static void main(String[] args) {
 		MainController mc = new MainController();
