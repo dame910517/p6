@@ -20,7 +20,7 @@ public class Array7 {
 	/**
 	 * 
 	 * Konstruerar och initialiserar en 1D-array
-	 * @param array7 array som initialiseras
+	 * @param array7 Den array som konstruktorn tar emot
 	 */
 
 	public Array7(Array7 array7) {
@@ -31,7 +31,7 @@ public class Array7 {
 	/**
 	 * 
 	 * Konstruerar och initialiserar en kopia utav en 1D-array
-	 * @param array array som initialiseras
+	 * @param array Den array som konstruktorn tar emot
 	 */
 	public Array7(int[] array) {
 		this.array = array.clone();
@@ -41,8 +41,8 @@ public class Array7 {
 	/**
 	 * Metod för att initiera en 1D-array med värden på en viss position
 	 * 
-	 * @param pos positionen i arrayen
-	 * @param value värdet i arrayen
+	 * @param pos Positionen i arrayen
+	 * @param value Värdet i arrayen
 	 */
 
 	public void setElement(int pos, int value) {
@@ -52,8 +52,8 @@ public class Array7 {
 	/**
 	 * Metod för att retunera värdet på en positionerna i arrayen
 	 * 
-	 * @param pos position i arrayen
-	 * @return int retunerar positionen i arrayen
+	 * @param pos Position i arrayen
+	 * @return int Retunerar positionen i arrayen
 	 */
 	public int getElement(int pos) {
 		return array[pos];
@@ -63,7 +63,7 @@ public class Array7 {
 	/**
 	 * Metod för att initiera en 1D-array med Array7-objekt
 	 * 
-	 * @param array7 objekt i arrayen
+	 * @param array7 Objekt som används för att hämta elementen
 	 */
 
 	public void setArray(Array7 array7) { 
@@ -76,7 +76,7 @@ public class Array7 {
 	/**
 	 * Metod för att initiera en kopia utav 1D-arrayen
 	 * 
-	 * @param array array som ska initieras
+	 * @param array Den array som konstruktorn tar emot
 	 */
 	public void setArray(int[] array) {
 		this.array = array.clone();
@@ -84,7 +84,7 @@ public class Array7 {
 	}
 	
 	/**
-	 * Metod för att initiera och retunera en ny instans av Array7-objekt
+	 * Metod för att initiera och returnera en ny instans av Array7-objekt
 	 * 
 	 * @return Array7 Objekt retuneras
 	 */
@@ -99,7 +99,6 @@ public class Array7 {
 	/**
 	 * Metod för att initiera en ny instans utav 1D-arrayen samt returnera denna
 	 * 
-	 * @param array Array som ska initieras
 	 * @return int[] Retunerar 1D-array
 	 */
 	public int[] toIntArray() { 
