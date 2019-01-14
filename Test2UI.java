@@ -260,12 +260,12 @@ public class Test2UI extends JPanel
 		public void insertUpdate(DocumentEvent e) {
 			for(int i = 0; i < 7; i++)
 			{			
-				rightColumn.setElement(i, Integer.parseInt(tfRightColumn[i].getText()));
+				controller.getRightColumn().setElement(i, Integer.parseInt(tfRightColumn[i].getText()));
 			}
 				
 			for(int i = 0; i < 7; i++)
 			{		
-				leftColumn.setElement(i, Integer.parseInt(tfLeftColumn[i].getText()));
+				controller.getLeftColumn().setElement(i, Integer.parseInt(tfLeftColumn[i].getText()));
 			}
 
 		}
