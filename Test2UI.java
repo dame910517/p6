@@ -98,7 +98,7 @@ public class Test2UI extends JPanel
 		for(int i = 0; i < 7; i++)
 		{
 			this.tfLeftColumn[i] = new JTextField();			
-			this.tfLeftColumn[i].setText(Integer.toString(this.leftColumn.getElement(i)));			
+			this.tfLeftColumn[i].setText(Integer.toString(this.controller.getLeftColumn().getElement(i)));			
 			this.tfLeftColumn[i].setPreferredSize(new Dimension(30, 30));	
 			this.tfLeftColumn[i].getDocument().addDocumentListener(changeListener);
 			this.leftPanel.add(this.tfLeftColumn[i]);
@@ -204,7 +204,10 @@ public class Test2UI extends JPanel
 	public void setLeftColumn(Array7 mLeftColumn)
 	{
 		this.leftColumn = mLeftColumn;
+		
+		
 	}
+		
 	
 	
 	/**

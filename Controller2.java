@@ -55,9 +55,9 @@ public class Controller2
 	    */
 	public Controller2(Array7 mLeftColumn, Array7 mRightColumn, Array7x7 mArray)
 	{
-		middleGrid= mArray;
-	rightColumn = mRightColumn;
-	leftColumn = mLeftColumn;
+		middleGrid= mArray;	
+		rightColumn = mRightColumn;	
+		leftColumn = mLeftColumn;
 	
 	//inititerar Test2UI-objektet
 	ui = new Test2UI(this.leftColumn, this.rightColumn, this.middleGrid, this);
@@ -119,8 +119,8 @@ public class Controller2
 	{
 		for(int i = 0; i < 7; i++)
 		{
-			this.ui.getLeftTfColumn()[i].setText(Integer.toString(this.ui.getLeftColumn().getElement(i)));			
-			this.ui.getRightTfColumn()[i].setText(Integer.toString(this.ui.getRightColumn().getElement(i)));
+			this.ui.getLeftTfColumn()[i].setText(Integer.toString(this.leftColumn.getElement(i)));			
+			this.ui.getRightTfColumn()[i].setText(Integer.toString(this.rightColumn.getElement(i)));
 
 			for(int j = 0; j <7; j++)
 			{
@@ -138,7 +138,7 @@ public class Controller2
 	    */
 	public void moveLeft()
 	{
-		this.ui.setLeftColumn(this.ui.getMiddleColumn().shiftLeft(this.ui.getRightColumn()));
+		this.leftColumn = (this.middleGrid.shiftLeft(this.getLeftColumn()));
 	}
 	
 	
@@ -149,7 +149,7 @@ public class Controller2
 	    */
 	public void moveRight()
 	{
-		this.ui.setRightColumn(this.ui.getMiddleColumn().shiftRight(this.ui.getLeftColumn()));;
+		this.rightColumn = (this.middleGrid.shiftRight(this.getLeftColumn()));;
 	}
 }
 
