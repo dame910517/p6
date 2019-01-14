@@ -8,8 +8,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+/**
+ * Klassen Input ansvarar fÃ¶r att skicka vidare en anvÃ¤ndares input i rutan och skickar
+ * sedan vidare detta till controllern.
+ * @author Patrik
+ *
+ */
+
 public class Input extends JPanel implements ActionListener {
-	//JPanels för vår display
+	//JPanels fÃ¶r vÃ¥rt fÃ¶nster
 	private JPanel mainPan = new JPanel();
 	private JPanel upper = new JPanel();
 	private JPanel bottom = new JPanel();
@@ -20,39 +27,42 @@ public class Input extends JPanel implements ActionListener {
 	private JPanel upperColSpace = new JPanel();
 	private JPanel bottomColSpace = new JPanel();
 
-	//Knappar för vår inputdisplay som gör olika funktioner
+	//Knappar fÃ¶r vÃ¥r inputdisplay som gÃ¶r olika funktioner
 	private JButton readCol = new JButton("Read column");
 	private JButton writeCol = new JButton("Write column");
 	private JButton readRow = new JButton("Read row");
 	private JButton writeRow = new JButton("Write row");
 
-	//JLabel och JTextField som hjälper oss att navigera i panelen
+	//JLabel och JTextField som hjÃ¤lper oss att navigera i panelen
 	private JLabel colNbr = new JLabel("Column nbr:");
 	private JTextField colNbrText = new JTextField();
 	private JLabel rowNbr = new JLabel("Row nbr:");
 	private JTextField rowNbrText = new JTextField();
 
-	//Fonten för vår text/siffror
+	//Fonten fÃ¶r vÃ¥r text/siffror
 	private Font font = new Font( "SansSerif", Font.PLAIN, 16 );
 
-	//String som "översätter" vår input i JTextField till int som skickas vidare till kontrollern
+	//String som "Ã¶versÃ¤tter" vÃ¥r input i JTextField till int som skickas vidare till kontrollern
 	private String textCol;
 	private String textRow;
 
 	//Kontrollern som instansvariabel
 	private Controller controller;
 
-	//JTextField för våra arrays i panelen
+	//JTextField fÃ¶r vÃ¥ra arrays i panelen
 	private JTextField[] rightArray = new JTextField[7];
 	private JTextField[] downArray = new JTextField[7];
 
-	//Dessa instansvariablerna behövs vid skrivning av row och kolumn
+	//Dessa instansvariablerna behÃ¶vs vid skrivning av row och kolumn
 	private String tempCol;
 	private String tempRow;
 	private int valueCol;
 	private int valueRow;
 
-	//Vår konstruktor där panellen byggs upp
+	/**
+	 * VÃ¥r konstruktor dÃ¤r hela panellen/fÃ¶nstret byggs upp
+	 * @param controller behÃ¶vs fÃ¶r kopplingen till controller-klassen
+	 */
 	public Input(Controller controller) {
 		this.controller = controller;
 		initiateRightArray();
@@ -105,14 +115,16 @@ public class Input extends JPanel implements ActionListener {
 		rightArr.add(rightArrayen, BorderLayout.CENTER);
 		downArr.add(downArrayen, BorderLayout.WEST);
 
-		//Lyssnare för knappar
+		//Lyssnare fÃ¶r knappar
 		readCol.addActionListener(this);
 		writeCol.addActionListener(this);
 		readRow.addActionListener(this);
 		writeRow.addActionListener(this);
 	}
 
-	//Metod som initierar höger-arrayen
+	/**
+	 * Metod som initierar hÃ¶gerarrayen
+	 */
 	public void initiateRightArray() {
 		for(int i = 0; i < rightArray.length; i++) {
 			rightArray[i] = new JTextField();
@@ -122,7 +134,10 @@ public class Input extends JPanel implements ActionListener {
 		}
 	}
 
-	//Metod som tar vår input i JTextField och skriver över den valda kolumnen i vår array
+	/**
+	 * Metod som tar vÃ¥r input i JTextField och skriver Ã¶ver den valda kolumnen i vÃ¥r array
+	 * @return elementen i JTextFields
+	 */
 	public Array7 writeColumnArray() {
 		Array7 writeColArray = new Array7();
 		for(int i = 0; i < 7; i++) {
@@ -133,7 +148,10 @@ public class Input extends JPanel implements ActionListener {
 		return writeColArray;
 	}
 
-	//Metod som tar vår input i JTextField och skriver över den valda raden i vår array
+	/**
+	 * Metod som tar vÃ¥r input i JTextField och skriver Ã¶ver den valda raden i vÃ¥r array
+	 * @return elementen i JTextFields
+	 */
 	public Array7 writeRowArray() {
 		Array7 writeRowArray = new Array7();
 		for(int i = 0; i < 7; i++) {
@@ -144,7 +162,9 @@ public class Input extends JPanel implements ActionListener {
 		return writeRowArray;
 	}
 
-	//Metod som initierar botten-arrayen
+	/**
+	 * Metod som initierar bottenarrayen
+	 */
 	public void initiateDownArray() {
 		for(int row = 0; row < downArray.length; row++) {
 			downArray[row] = new JTextField();
@@ -154,38 +174,46 @@ public class Input extends JPanel implements ActionListener {
 		}
 	}
 
-	//Metod som gör om vår input i JTextFielden till String, som vi sedan gör över till int under actionPerformed för att kunna specificera kolumn som vi vill läsa/ändra
+	/**
+	 * Metod som gÃ¶r om vÃ¥r input i JTextFielden till String, som vi sedan konverterar till int
+	 * under actionPerformed fÃ¶r att kunna specificera kolumnen som vi vill lÃ¤sa/Ã¤ndra
+	 */
 	public void getTextFromColField() {
 		textCol = colNbrText.getText();
 	}
 
-	//Metod som gör om vår input i JTextFielden till String, som vi sedan gör över till int under actionPerformed för att kunna specificera rad som vi vill läsa/ändra
+	/**
+	 * Metod som gÃ¶r om vÃ¥r input i JTextFielden till String, som vi sedan konverterar till int
+	 * under actionPerformed fÃ¶r att kunna specificera raden som vi vill lÃ¤sa/Ã¤ndra
+	 */
 	public void getTextFromRowField() {
 		textRow = rowNbrText.getText();
 	}
 
-	//Metod som gör någonting när en knapp trycks in
+	/**
+	 * Metoden ansvarar fÃ¶r att en funktion ska gÃ¶ras dÃ¥ en knapp trycks in
+	 */
 	public void actionPerformed(ActionEvent e) { 
 
-		//Om "read column" knappen trycks in, så skickar vi vidare vilken kolumn vi vill läsa till kontrollern
+		//Om "read column" knappen trycks in, sÃ¥ skickar vi vidare vilken kolumn vi vill lÃ¤sa till kontrollern
 		if( e.getSource() == readCol) {
 			getTextFromColField();
 			controller.readColumn(Integer.parseInt(textCol));
 		}
 
-		//Om "write column" knappen trycks in, så skickar vi vidare vår inskrivna array i JTextField rutorna och skriver över den valda kolumnen
+		//Om "write column" knappen trycks in, sï¿½ skickar vi vidare vÃ¥r inskrivna array i JTextField rutorna och skriver Ã¶ver den valda kolumnen
 		if( e.getSource() == writeCol) {
 			getTextFromColField();
 			controller.writeColumn(Integer.parseInt(textCol), writeColumnArray());
 		}
 
-		//Om "read row" knappen trycks in, så skickar vi vidare vilken rad vi vill läsa till kontrollern
+		//Om "read row" knappen trycks in, sÃ¥ skickar vi vidare vilken rad vi vill lï¿½Ã¤a till kontrollern
 		if( e.getSource() == readRow) {
 			getTextFromRowField();
 			controller.readRow(Integer.parseInt(textRow));
 		}
 
-		//Om "write row" knappen trycks in, så skickar vi vidare vår inskrivna array i JTextField rutorna och skriver över den valda raden
+		//Om "write row" knappen trycks in, sÃ¥ skickar vi vidare vÃ¥r inskrivna array i JTextField rutorna och skriver Ã¶ver den valda raden
 		if( e.getSource() == writeRow) {
 			getTextFromRowField();
 			controller.writeRow(Integer.parseInt(textRow), writeRowArray());

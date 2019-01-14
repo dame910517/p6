@@ -3,8 +3,17 @@ package p6;
 import java.awt.*;
 import javax.swing.*;
 
+/**
+ * Klassen ansvarar för att visa en 7x7 Array och delar av den
+ * på en display.
+ * @author Patrik Skuza
+ *
+ */
+
 public class Viewer extends JPanel {
-	//JPanels och JLabels
+	/**
+	 * JPanels och JLabels
+	 */
 	private JPanel panel = new JPanel(new GridLayout(7,7,18,18));
 	private JPanel leftColumn = new JPanel(new GridLayout(7,1,18,18));
 	private JLabel array7x7 = new JLabel("Column                                                      Array7x7");
@@ -17,15 +26,21 @@ public class Viewer extends JPanel {
 	private JPanel southRowPanel = new JPanel();
 	private JPanel centerPanel = new JPanel();
 
-	//Fonten f�r all text och siffror
+	/**
+	 * En gemensam font som vi har valt att använda för moment 2
+	 */
 	private Font font = new Font( "SansSerif", Font.PLAIN, 16 );
 
-	//JLabel-arraysen som dyker upp i viewer-displayen
+	/**
+	 * JLabels som är hållare för våra arrays.
+	 */
 	private JLabel[][] centerArray = new JLabel[7][7];
 	private JLabel[] leftArray = new JLabel[7];
 	private JLabel[] southArray = new JLabel[7];
 
-	//Konstruktor d�r displayen byggs upp
+	/**
+	 * Konstruktorn där hela displayen byggs upp.
+	 */
 	public Viewer() {
 		initiateArrayLeftColumn();
 		initiateArray7x7();
@@ -57,7 +72,9 @@ public class Viewer extends JPanel {
 		centerPanel.add(panel, BorderLayout.CENTER);
 	}
 
-	//Metod f�r att initiera 7x7-arrayen
+	/**
+	 * Metod för att initiera Array7x7
+	 */
 	public void initiateArray7x7() {
 		for(int row = 0; row < centerArray.length; row++) {
 			for(int col = 0; col < centerArray[row].length; col ++) {
@@ -69,7 +86,11 @@ public class Viewer extends JPanel {
 		}
 	}
 
-	//Metod f�r att fylla 7x7-arrayen
+	/**
+	 * Metod för att fylla Array7x7
+	 * @param array7x7 hänvisar till Array7x7-klassen
+	 * och används för att ändra innehållet i Arrayen
+	 */
 	public void setCenterArray(Array7x7 array7x7) {
 		for(int row = 0; row < centerArray.length; row++) {
 			for(int col = 0; col < centerArray[row].length; col ++) {
@@ -78,7 +99,9 @@ public class Viewer extends JPanel {
 		}
 	}
 
-	//Metod f�r att initiera v�nster-arrayen
+	/**
+	 * Metod för att initiera vänsterkolumnen på fönstret.
+	 */
 	public void initiateArrayLeftColumn() {
 		for(int row = 0; row < leftArray.length; row++) {
 			leftArray[row] = new JLabel();
@@ -88,21 +111,31 @@ public class Viewer extends JPanel {
 		}
 	}
 
-	//Metod f�r att fylla v�nster-arrayen
+	/**
+	 * Metod för att fylla vänsterkolumnen
+	 * @param array7 hänvisar till Array7x7-klassen
+	 * och används för att ändra innehållet i Arrayen
+	 */
 	public void setArrayLeftColumn(Array7 array7) {
 		for(int i = 0; i < leftArray.length; i++) {
 			leftArray[i].setText(String.valueOf(array7.getElement(i)));
 		}
 	}
 
-	//Metod f�r att fylla botten-arrayen
+	/**
+	 * Metod för att fylla bottenarrayen
+	 * @param array7 hänvisar till Array7x7-klassen
+	 * och används för att ändra innehållet i Arrayen
+	 */
 	public void setArrayBottomColumn(Array7 array7) {
 		for(int i = 0; i < southArray.length; i++) {
 			southArray[i].setText(String.valueOf(array7.getElement(i)));
 		}
 	}
 
-	//Metod f�r att initiera botten-arrayen
+	/**
+	 * Metod för att initiera bottenraden
+	 */
 	public void initiateArraySouthRow() {
 		for(int i = 0; i < southArray.length; i++) {
 			southArray[i] = new JLabel();
