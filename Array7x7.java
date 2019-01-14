@@ -223,7 +223,7 @@ public class Array7x7 {
 	 */
 	public Array7 shiftDown(Array7 a7) {
 		Array7 retArray7 = this.getRow(6);
-		for (int i = array2.length - 1; i < 0; i--) {
+		for (int i = array2.length - 1; i > 0; i--) {
 			this.setRow(i, this.getRow(i - 1));
 		}
 		this.setRow(0, a7);
