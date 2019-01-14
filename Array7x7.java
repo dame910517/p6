@@ -25,7 +25,7 @@ public class Array7x7 {
 	 * 
 	 * Konstruerar och initialiserar en 2D-array
 	 * 
-	 * @param array7x7 array som initialiseras
+	 * @param array7x7 Den array som konstruktorn tar emot
 	 */
 
 	public Array7x7(Array7x7 array7x7) {
@@ -37,7 +37,7 @@ public class Array7x7 {
 	 * 
 	 * Konstruerar och initialiserar en kopia utav en 2D-array
 	 * 
-	 * @param array2 array som initialiseras
+	 * @param array2 Den array som konstruktorn tar emot
 	 */
 	public Array7x7(int[][] array2) {
 		this.array2 = array2.clone();
@@ -61,7 +61,7 @@ public class Array7x7 {
 	 * 
 	 * @param row Raden som ska initieras
 	 * @param col Columnen som ska initieras
-	 * @return int Retunerar elementet
+	 * @return int Elementet som returneras på positionen 
 	 */
 	public int getElement(int row, int col) {
 		return array2[row][col];
@@ -69,10 +69,10 @@ public class Array7x7 {
 	}
 
 	/**
-	 * Metod för skicka in rad som ska appliceras på objektet
+	 * Metod för skicka in en rad som ska appliceras på objektet
 	 * 
 	 * @param row    Raden som det ska appliceras på
-	 * @param theRow objektet som anger elementen på raden
+	 * @param theRow Objektet som anger elementen på raden
 	 */
 	public void setRow(int row, Array7 theRow) {
 		for (int i = 0; i < array2.length; i++) {
@@ -81,10 +81,10 @@ public class Array7x7 {
 	}
 
 	/**
-	 * Metod för att hämta värdet på positionen row
+	 * Metod för att hämta värderna på raden
 	 * 
-	 * @param row Raden objektet retunderas från
-	 * @return Array7 objektet retuneras
+	 * @param row Raden objektet returneras från
+	 * @return Array7 Objektet som returneras
 	 */
 	public Array7 getRow(int row) {
 		Array7 ny = new Array7();
@@ -98,7 +98,7 @@ public class Array7x7 {
 	 * Metod för skicka in kolumn som ska appliceras på objektet
 	 * 
 	 * @param col    Kolumnen som ska initieras
-	 * @param theCol objektet som anger elementet på kolumnen
+	 * @param theCol Objektet som anger elementet på kolumnen
 	 */
 	public void setCol(int col, Array7 theCol) {
 		for (int i = 0; i < array2.length; i++) {
@@ -107,10 +107,10 @@ public class Array7x7 {
 	}
 
 	/**
-	 * Metod för att hämta värdet på positionen col
+	 * Metod för att hämta värderna på kolumnen
 	 * 
-	 * @param col Columnen objektet returneras från
-	 * @return Array7 objektet som returneras
+	 * @param col Kolumnen objektet returneras från
+	 * @return Array7 Objektet som returneras
 	 */
 	public Array7 getCol(int col) {
 		Array7 ny = new Array7();
@@ -123,7 +123,7 @@ public class Array7x7 {
 	/**
 	 * Metod för att initiera en 2D-array med Array7x7-objekt
 	 * 
-	 * @param array7x7 Den array som ska initieras
+	 * @param array7x7 Den array som metoden tar emot
 	 */
 	public void setArray(Array7x7 array7x7) {
 		array2 = array7x7.toIntArray();
@@ -132,14 +132,14 @@ public class Array7x7 {
 	/**
 	 * Metod för att initiera en kopia utav en 2D-array
 	 * 
-	 * @param array Den array som ska initieras
+	 * @param array Den array som tas emot
 	 */
 	public void setArray(int[][] array) {
 		this.array2 = array.clone();
 	}
 
 	/**
-	 * Metod för att initiera och retunera en ny instans av Array7x7
+	 * Metod för att initiera och returnera en ny instans av Array7x7
 	 * 
 	 * @return Array7x7 Objekt som returneras
 	 */
@@ -157,7 +157,7 @@ public class Array7x7 {
 	/**
 	 * Metod för att initiera en ny instans utav 2D-arrayen samt returnera denna
 	 * 
-	 * @return int[][] Returnerar 2D-array
+	 * @return int[][] Objekt som returneras
 	 */
 	public int[][] toIntArray() {
 		int[][] ny = new int[7][7];
