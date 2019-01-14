@@ -4,18 +4,23 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 
+
+/* Klassen skapar ett controller2-objekt med inmatade värden som körs i ett frame-objekt
+ * @author Andreas Jönsson den 13/1-2019  
+ * 
+ **/
 public class RunMoment3 
 {
 
 	public static void main(String [] args)
 	{
-
 		Random rng = new Random();
 		
 	    Array7 testArray1 = new Array7();
 	    Array7 testArray2 = new Array7();
-	    Array7 testArray4 = new Array7();
+	    Array7x7 testArray3 = new Array7x7();
 	    
+	    //ger elementen i testArray1,testArray2 och testArray3 ett slumpat värde
 	    for(int i = 0; i < 7; i++)
 		{
 			testArray1.setElement(i, rng.nextInt(9));
@@ -28,22 +33,18 @@ public class RunMoment3
 			
 		}
 
+	    for(int x = 0; x < 7; x++)
+		{
+	    	for(int y = 0; y < 7; y++)
+			{
+	    		testArray3.setElement(x, y, rng.nextInt(9));
+			}
+		}
 	    
-	    int[][] test = {{7, 6, 6, 6, 7, 8, 9}, 
-	    		{2, 6, 6, 6, 7, 8, 9}, 
-	    		{7, 51, 6, 6, 7, 8, 9},
-	    		{1, 6, 2, 6, 7, 8, 9},
-	    		{6, 1, 6, 6, 7, 8, 9},
-	    		{3, 6, 4, 6, 7, 8, 16},
-	    		{9, 6, 6, 6, 21, 8, 12}};
-	    
-	    Array7x7 testArray3 = new Array7x7(test);
-		
-	   // Controller2 controller = new Controller2();
+		//skapar controller2-objektet	    
 		Controller2 controller = new Controller2(testArray1, testArray2, testArray3);
 		
-		
-		
+		//skapar frame-objektet
 		JFrame frame1 = new JFrame( "SSPViewer" );
 		frame1.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		frame1.add(controller.getUI());
