@@ -2,12 +2,28 @@ package p6;
 
 import java.util.Arrays;
 
+/**
+ * En klass för att översätta en sträng till en rad Array7x7-objekt
+ * @author Haris
+ */
 public class Characters {
 
+	/**
+	 * En metod för att översätta en sträng till Array7x7-objekt,
+	 * i förvalda färger, vit text och svart bakgrund
+	 * @param input Strängen som skall översättas
+	 * @return Array7x7-array med bokstäverna
+	 */
 	public static Array7x7[][] translate(String input) {
 		return  translate(input, Color.WHITE, Color.BLACK);
 	}
 
+	/**
+	 * En metod för att översätta en sträng till Array7x7-objekt,
+	 * med val för färger
+	 * @param input Strängen som skall översättas
+	 * @return Array7x7-array med bokstäverna
+	 */
 	public static Array7x7[][] translate(String input, int fore, int back) {
 		Array7x7[][] res = new Array7x7[1][input.length()];
 		input = input.toLowerCase();
@@ -17,10 +33,22 @@ public class Characters {
 		return res;
 	}
 
+	/**
+	 * En metod för att översätta ett tecken till ett Array7x7-objekt,
+	 * i förvalda färger, vit text och svart bakgrund
+	 * @param input Tecknet som skall översättas
+	 * @return Array7x7-objekt med bokstäverna
+	 */
 	public static Array7x7 translate(char input) {
 		return translate(input, Color.WHITE, Color.BLACK); 
 	}
 
+	/**
+	 * En metod för att översätta ett tecken till ett Array7x7-objekt,
+	 * med val för färger
+	 * @param input Tecknet som skall översättas
+	 * @return Array7x7-objekt med bokstäverna
+	 */
 	public static Array7x7 translate(char input, int back, int fore) {
 		Array7x7 res = space();
 		switch (input) {
@@ -176,10 +204,20 @@ public class Characters {
 		return res;
 	}
 
+	/**
+	 * Returnerar ett space-tecken i form av ett Array7x7-objekt
+	 * i förvalda färger, vit text och svart bakgrund
+	 * @return Array7x7-objektet
+	 */
 	public static Array7x7 space() {
 		return space(Color.WHITE, Color.BLACK);
 	}
 
+	/**
+	 * Returnerar ett space-tecken i form av ett Array7x7-objekt
+	 * med val av färg
+	 * @return Array7x7-objektet
+	 */
 	public static Array7x7 space(int O, int X) {
 		int[][] res = new int[7][7];
 		for (int[] row : res) 
@@ -540,7 +578,7 @@ public class Characters {
 	}
 	
 	public static Array7x7 m() {
-		return g(Color.WHITE, Color.BLACK);
+		return m(Color.WHITE, Color.BLACK);
 	}
 
 	public static Array7x7 m(int O, int X) {
@@ -556,7 +594,7 @@ public class Characters {
 	}
 
 	public static Array7x7 n() {
-		return g(Color.WHITE, Color.BLACK);
+		return n(Color.WHITE, Color.BLACK);
 	}
 
 	public static Array7x7 n(int O, int X) {
@@ -572,7 +610,7 @@ public class Characters {
 	}
 
 	public static Array7x7 o() {
-		return p(Color.WHITE, Color.BLACK);
+		return o(Color.WHITE, Color.BLACK);
 	}
 
 	public static Array7x7 o(int O, int X) {
