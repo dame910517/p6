@@ -12,6 +12,13 @@ import java.util.TimerTask;
 
 import javax.swing.*;
 
+/**
+ * En klass för att skapa en display utav 7x10 Array7x7 objekt. Displayen innehåller ett antal knappar
+ * samt en färgfylld display med dynamisk text och/eller bilder.
+ * 
+ * @author Iris Brinkborg
+ * @author Amanda Eriksson
+ */
 public class Display extends JPanel {
 	private Timer timer;
 	private boolean scrolling;
@@ -23,7 +30,6 @@ public class Display extends JPanel {
 	private JPanel pnlArrows = new JPanel(new GridLayout(3, 3));
 	private JPanel pnlSouth = new JPanel(new GridLayout(1, 3));
 
-	// Knappar för att styra bokstävernas flöde i fönstret.
 	private JButton btnUpLeft = new JButton("↖");
 	private JButton btnUp = new JButton(" ↑");
 	private JButton btnUpRight = new JButton("↗");
@@ -42,6 +48,12 @@ public class Display extends JPanel {
 
 	private MainController mc;
 	private ColorDisplay cd = new ColorDisplay(7, 10, Color.WHITE, Color.BLACK, 1, 10);
+	
+	/**
+	 * Konstruerar och initierar knappar samt storlek på displayen
+	 * 
+	 * @param mc Det maincontroller objekt som vi använder
+	 */
 
 	public Display(MainController mc) {
 		this.mc = mc;
@@ -90,6 +102,11 @@ public class Display extends JPanel {
 		btnCenter.addActionListener(new Stop());
 
 	}
+	
+	/**
+	 * Metod för att applicera arrayen på colordisplayen
+	 * 
+	 */
 
 	public void addArray() {
 		Array7x7 array[][] = mc.getDisplayArray();
@@ -101,15 +118,26 @@ public class Display extends JPanel {
 		cd.updateDisplay();
 	}
 
-	private class ScrollerListener implements ActionListener {// NÄR kollla vilken knapp
+	
+	/**
+	 * En inre klass för att aktivera den rinnande texten samt sätta en timer som körs var 
+	 * 100 millisekund och startar 100 millisekunder efter knappen har tryckts
+	 * 
+	 * @param e Det objekt vi använder
+	 */
+	private class ScrollerListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-
-			ScrollerTask task = new ScrollerTask((JButton) e.getSource());
+			ScrollerTask task = new ScrollerTask((JButton) e.getSource());//kastar e.getsource t JButon 
 			pauseText();
 			timer = new Timer();
 			timer.schedule(task, 100, 100);
 		}
 	}
+	
+	/**
+	 * Metod för att stoppa den rinnande texten
+	 * 
+	 */
 
 	private void pauseText() {
 		if (scrolling == true) {
@@ -119,6 +147,12 @@ public class Display extends JPanel {
 		}
 	}
 
+	/**
+	 * En inre klass för att bestämma hur texten ska rinna beroende på vilken knapp användaren tryckter på
+	 * 
+	 * @param input Objekt som används
+	 */
+	
 	private class ScrollerTask extends TimerTask {
 		private JButton input;
 
@@ -128,7 +162,7 @@ public class Display extends JPanel {
 
 		@Override
 		public void run() {
-			if (input.equals(btnUpLeft)) {// kollar vilken knapp
+			if (input.equals(btnUpLeft)) {
 				mc.shiftTextLeft();
 				mc.shiftTextUp();
 			} else if (input.equals(btnUp)) {
@@ -156,13 +190,25 @@ public class Display extends JPanel {
 
 		}
 	}
-
+	
+	/**
+	 * En inre klass för att stoppa den rinnande texten 
+	 * 
+	 * @param e Det objekt vi använder
+	 */
+	
 	private class Stop implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			pauseText();
 		}
 	}
 
+	/**
+	 * En inre klass för att sätta texten till det användaren skriver i swing-komponenten JOptionPane
+	 * 
+	 * @param e Det objekt vi använder
+	 */
+	
 	private class DecideText implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			String input = JOptionPane.showInputDialog(null, "Write the text you wish to display");
@@ -172,32 +218,28 @@ public class Display extends JPanel {
 		}
 	}
 
+	/**
+	 * En inre klass för att sätta bilden som användaren anger
+	 * 
+	 * @param e Det objekt vi använder
+	 */
+	
 	private class OpenDirectoryListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			int ret = fileChooser.showOpenDialog(null);
 			if (e.getSource() == btnBigRight) {
-				if (ret == JFileChooser.APPROVE_OPTION) {
-					Picture picture = new Picture(fileChooser.getSelectedFile());
-					mc.addPictureToBackground(picture, Color.TRANSPARENT);
-					mc.finalizeDisplayArray();
-					addArray();
+				try {
+					if (ret == JFileChooser.APPROVE_OPTION) {
+						Picture picture = new Picture(fileChooser.getSelectedFile());
+						mc.addPictureToBackground(picture, Color.TRANSPARENT);
+						mc.finalizeDisplayArray();
+						addArray();
+					}
+				} catch (Exception ex) {
+					System.out.println("File is not an image");
 				}
 			}
 		}
-	}
-
-	// boolean, om scrol is true , stäng av
-
-	public static void main(String[] args) {
-		MainController mc = new MainController();
-		Display display = new Display(mc);
-		JFrame frame1 = new JFrame("Display");
-		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame1.add(display);
-		display.addArray();
-		frame1.setLocationRelativeTo(null);
-		frame1.pack();
-		frame1.setVisible(true);
 	}
 }
 
