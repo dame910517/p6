@@ -138,7 +138,7 @@ public class Controller2
 	    */
 	public void moveLeft()
 	{
-		this.leftColumn = (this.middleGrid.shiftLeft(this.getLeftColumn()));
+		this.leftColumn = (this.middleGrid.shiftLeft(this.getRightColumn()));
 	}
 	
 	
