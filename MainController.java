@@ -22,7 +22,7 @@ public class MainController {
 	 * Metod för att initiera en 2D-array med Array7x7-objekt
 	 * @param array Den array som ska initieras
 	 */
-	private void initiateArray(Array7x7[][] array) {
+	private void initializeArray(Array7x7[][] array) {
 		for (Array7x7[] rowA7x7: array)
 			for (int colA7x7 = 0; colA7x7 < rowA7x7.length; colA7x7++)
 				rowA7x7[colA7x7] = new Array7x7();
@@ -69,7 +69,8 @@ public class MainController {
 	 */
 	public void addPictureToBackground(Picture pic, int backgroundColor) {
 
-		fillArray(arrBack, backgroundColor); // Fyll bakgrunden med färgen backgroundColor
+		if (backgroundColor != Color.TRANSPARENT)
+			fillArray(arrBack, backgroundColor); // Fyll bakgrunden med färgen backgroundColor
 
 		// Skapa de variabler som kommer behövas
 		int		firstRenderRow = 0, lastRenderRow = (dispHeight * 7) - 1,
@@ -254,9 +255,9 @@ public class MainController {
 		arrDisp = new Array7x7[dispHeight][dispWidth];
 		arrBack = new Array7x7[dispHeight][dispWidth];
 		arrFore = new Array7x7[dispHeight][dispWidth];
-		initiateArray(arrDisp);
-		initiateArray(arrBack);
-		initiateArray(arrFore);
+		initializeArray(arrDisp);
+		initializeArray(arrBack);
+		initializeArray(arrFore);
 	}
 
 	/**
