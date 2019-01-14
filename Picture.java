@@ -2,34 +2,37 @@ package p6;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * Klass för att skapa ett Picture-objekt för att kunna få ut färgmedelvärdet i en bild
+ * @author filip
+ */
 public class Picture {
+	
 	private BufferedImage image;
-
-	public Picture(String path) throws IOException {
-		this(new File(path));
+	
+	/**
+	 * Skapar ett Picture-objekt från en File av typ jpg, jpeg, png, och tif
+	 * @param file Filen som ska tas in
+	 * @throws Exception SLänger ett exception om filen inte stöds
+	 */
+	public Picture(File file) throws Exception {
+			if (new FileNameExtensionFilter("Image Files", "jpg", "jpeg", "png", "tif").accept(file))
+				image = ImageIO.read(file);
+			else
+				throw new Exception("File isn't an image.");
 	}
 
-	public Picture(File file) {
-		try {
-			image = ImageIO.read(file);
-		} catch (IOException e) {
-			System.out.println(e.toString());
-		}	
-	}
-
-	public int getColor(int x, int y) {
-		int clr=  image.getRGB(x,y); 
-		int  red   = (clr & 0x00ff0000) >> 16;
-		int  green = (clr & 0x0000ff00) >> 8;
-		int  blue  =  clr & 0x000000ff;
-		return Color.rgb(red, green, blue);
-	}
-
+	/**
+	 * Hämtar medelfärgen från en area i en bild
+	 * @param x1 X-startpunkten för arean
+	 * @param y1 Y-startpunkten för arean
+	 * @param x2 X-slutpunkten för arean
+	 * @param y2 Y-slutpunkten för arean
+	 * @return Färgen som returneras
+	 */
 	public int getAverageColor(double x1, double y1, double x2, double y2) {
 
 		int color = 0;
@@ -67,10 +70,18 @@ public class Picture {
 		return Color.rgb((int)Math.round(red), (int)Math.round(green), (int)Math.round(blue));
 	}
 
+	/**
+	 * Hämtar bredden på bilden
+	 * @return
+	 */
 	public int getWidth() {
 		return image.getWidth();
 	}
 
+	/**
+	 * Hämtar höjden på bilden
+	 * @return
+	 */
 	public int getHeight() {
 		return image.getHeight();
 	}
