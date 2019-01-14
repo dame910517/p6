@@ -14,7 +14,7 @@ import javax.swing.*;
 
 /**
  * En klass för att skapa en display utav 7x10 Array7x7 objekt. Displayen innehåller ett antal knappar
- * samt en färgfylld display med dynamisk text och/eller bilder.
+ * samt en färgfylld display med dynamisk text och/eller med bilder.
  * 
  * @author Iris Brinkborg
  * @author Amanda Eriksson
@@ -22,9 +22,6 @@ import javax.swing.*;
 public class Display extends JPanel {
 	private Timer timer;
 	private boolean scrolling;
-
-	private ImageIcon imgSetText = new ImageIcon("Images/settext2.jpg");
-	private ImageIcon imgChooseImage = new ImageIcon("Images/chooseimage.jpg");
 
 	private JPanel pnlColorPanel = new JPanel(new BorderLayout());
 	private JPanel pnlArrows = new JPanel(new GridLayout(3, 3));
@@ -43,8 +40,8 @@ public class Display extends JPanel {
 	private JFileChooser fileChooser = new JFileChooser();
 
 	// Knappar för att sätta text och bild
-	private JButton btnSetText = new JButton("Skriv in en text"); // JButton(imgSetText);
-	private JButton btnBigRight = new JButton("Välj en bild"); // (imgChooseImage);
+	private JButton btnSetText = new JButton("Skriv in en text"); 
+	private JButton btnBigRight = new JButton("Välj en bild");
 
 	private MainController mc;
 	private ColorDisplay cd = new ColorDisplay(7, 10, Color.WHITE, Color.BLACK, 1, 10);
@@ -120,8 +117,8 @@ public class Display extends JPanel {
 
 	
 	/**
-	 * En inre klass för att aktivera den rinnande texten samt sätta en timer som körs var 
-	 * 100 millisekund och startar 100 millisekunder efter knappen har tryckts
+	 * En inre klass för att aktivera den rinnande texten så att den körs var 
+	 * 100:e millisekund och startar 100 millisekunder efter knappen har tryckts
 	 * 
 	 * @param e Det objekt vi använder
 	 */
@@ -148,9 +145,9 @@ public class Display extends JPanel {
 	}
 
 	/**
-	 * En inre klass för att bestämma hur texten ska rinna beroende på vilken knapp användaren tryckter på
+	 * En inre klass för att bestämma hur texten ska rinna beroende på vilken knapp användaren trycker på
 	 * 
-	 * @param input Objekt som används
+	 * @param input Objekt som kontruktorn tar emot
 	 */
 	
 	private class ScrollerTask extends TimerTask {
@@ -194,7 +191,7 @@ public class Display extends JPanel {
 	/**
 	 * En inre klass för att stoppa den rinnande texten 
 	 * 
-	 * @param e Det objekt vi använder
+	 * @param e Det objekt metoden använder
 	 */
 	
 	private class Stop implements ActionListener {
@@ -204,9 +201,9 @@ public class Display extends JPanel {
 	}
 
 	/**
-	 * En inre klass för att sätta texten till det användaren skriver i swing-komponenten JOptionPane
+	 * En inre klass för att sätta texten till det användaren skriver in i swing-komponenten JOptionPane
 	 * 
-	 * @param e Det objekt vi använder
+	 * @param e Det objekt metoden använder
 	 */
 	
 	private class DecideText implements ActionListener {
@@ -221,7 +218,7 @@ public class Display extends JPanel {
 	/**
 	 * En inre klass för att sätta bilden som användaren anger
 	 * 
-	 * @param e Det objekt vi använder
+	 * @param e Det objekt metoden använder
 	 */
 	
 	private class OpenDirectoryListener implements ActionListener {
@@ -240,6 +237,5 @@ public class Display extends JPanel {
 				}
 			}
 		}
-	}
 }
 
