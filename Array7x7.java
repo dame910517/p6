@@ -175,12 +175,11 @@ public class Array7x7 {
 	 * @param a7 Kolumn som stoppas in till höger
 	 * @return Array7 Objektet som returneras
 	 */
-	public Array7 shiftLeft(Array7 a7) { // behöver bara jobba i kolumner pga vänster och höger ej upp och ned
-		Array7 retArray7 = this.getCol(0);// sparar densom stoppar us så att den sparas , annars försvinner den
+	public Array7 shiftLeft(Array7 a7) { 
+		Array7 retArray7 = this.getCol(0);
 		for (int i = 0; i < array2.length - 1; i++) {
-			this.setCol(i, this.getCol(i + 1)); // stoppar in värden från en pos (till höger om den pos vi jobbar med)
-			// i den pos vi jobbar med, dvs shiftar vänster
-		} // får in en col och får ut en col, tar in ett a7 och stoppar in från parameter
+			this.setCol(i, this.getCol(i + 1)); 
+		}
 		this.setCol(6, a7);
 		return retArray7;
 	}
