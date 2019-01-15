@@ -117,10 +117,11 @@ public class Controller2
 	    */
 	public void update()
 	{
+		int s = 0;
 		for(int i = 0; i < 7; i++)
 		{
-			this.ui.getLeftTfColumn()[i].setText(Integer.toString(this.leftColumn.getElement(i)));			
-			this.ui.getRightTfColumn()[i].setText(Integer.toString(this.rightColumn.getElement(i)));
+			this.ui.getLeftTfColumn()[i].setText(Integer.toString(this.ui.getLeftColumn().getElement(i)));			
+			this.ui.getRightTfColumn()[i].setText(Integer.toString(this.ui.getRightColumn().getElement(i)));
 
 			for(int j = 0; j <7; j++)
 			{
@@ -139,6 +140,8 @@ public class Controller2
 	public void moveLeft()
 	{
 		this.leftColumn = (this.middleGrid.shiftLeft(this.getRightColumn()));
+		this.ui.getLeftColumn().setArray(this.leftColumn);
+		
 	}
 	
 	
@@ -149,7 +152,8 @@ public class Controller2
 	    */
 	public void moveRight()
 	{
-		this.rightColumn = (this.middleGrid.shiftRight(this.getLeftColumn()));;
+		this.rightColumn = (this.middleGrid.shiftRight(this.getLeftColumn()));
+		this.ui.getRightColumn().setArray(this.rightColumn);
 	}
 }
 

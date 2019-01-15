@@ -241,6 +241,7 @@ public class Test2UI extends JPanel
 			if(e.getSource().equals(btnLeft))
 			{
 				controller.moveLeft();	
+				
 			}
 			
 			else if(e.getSource().equals(btnRight))
